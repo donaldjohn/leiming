@@ -55,7 +55,7 @@ public class DBHelp {
 		return map;
 
 	}
-
+	//从assest目录下获取对应的题目信息
 	public static List<Title> searchFromSD(unit un,Context context) {
 		List<Title> list = new ArrayList<Title>();
 //		String path = readPath();

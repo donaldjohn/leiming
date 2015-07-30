@@ -40,6 +40,7 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 	}
 
 	private void initUser() {
+		//进行读取asset文件夹下面的login文件，获取所有的用户账号，密码以及权限
 		Map<String, String[]> map = DBHelp.getUser(this);
 		Container.username = map.get("username");
 		Container.pwd = map.get("password");
@@ -95,18 +96,14 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 				// }
 
 				try {
-
 					if (username.getText() != null
 							&& password.getText() != null) {
+						//遍历所有的用户进行判断是否通过验证登录
 						for (int count = 0; count < Container.username.length; count++) {
-							if (username.getText().toString().equals(
-									Container.username[count])) {
-								if (password.getText().toString().equals(
-										Container.pwd[count])) {
+							if (username.getText().toString().equals(Container.username[count])) {
+								if (password.getText().toString().equals(Container.pwd[count])) {
 									Container.current_user =count;
-									Intent intent = new Intent(
-											LoginActivity.this,
-											MenuActivity.class);
+									Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
 									startActivity(intent);
 								}
 							}

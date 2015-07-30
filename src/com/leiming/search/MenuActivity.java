@@ -66,16 +66,14 @@ public class MenuActivity extends ActionBarActivity {
 		yourTextView.setTextColor(R.color.black);
 		actionbar.setTitle("雷鸣教育");
 	}
-
 	
-	OnItemClickListener itemclick1 =new OnItemClickListener() {
+	OnItemClickListener itemclick1 =new OnItemClickListener(){
 		// 点击跳转
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int postions,
 				long arg3) {
-			// TODO Auto-generated method stub
 			Intent intent = new Intent();
-
+			//根据当前登录的用户从limit中获取对应的权限，然后进行比对，如果是当前点击的功能和权限匹配那么就能够使用对应的功能
 			switch (postions) {
 			case 4:
 				if (!Container.limit[Container.current_user].contains(unit.TEACHER.getValue())) {
@@ -138,18 +136,17 @@ public class MenuActivity extends ActionBarActivity {
 		}
 		
 	};
-	
+	//统考类下所有功能对应的点击事件
 	OnItemClickListener itemclick2 =new OnItemClickListener() {
 		// 点击跳转
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int postions,
 				long arg3) {
-			// TODO Auto-generated method stub
+			//获取当前的点击的功能对应要求的权限值
 			String limit =unit.EXAM.getEXAMlimit(postions);
 			Intent intent = new Intent();
 				if (!Container.limit[Container.current_user].contains(limit)) {
-					Toast.makeText(getApplicationContext(), "权限不够",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 				} else {
 					intent.setClass(MenuActivity.this, ComputerActivity.class);
 					Container.current_unit = unit.TEACHER;
