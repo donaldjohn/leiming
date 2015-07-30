@@ -1,0 +1,3 @@
+username&&leiming;leiming2;
+password&&leiming;leiming2;
+limit&&computer,exam;computer;	

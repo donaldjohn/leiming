@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <ImageView
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/erwei" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="雷鸣教育简介：
+雷鸣教育2008年正式创立，专注于各类证书的培训工作，秉承“做教育就是做良心”这一办学理念，已培训学员数以万计。随着办学经验的丰富，规模的扩大，学员的认可，现已发展成为综合性教育培训机构。"
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="培训项目：
+全国计算机二级（access数据库，MS office）；会计证，初级会计职称；心理咨询师；人力资源管理师；企业管理师；育婴师；营养师；物流师等。"
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="雷鸣教育口号"
+            android:textSize="8pt" />
+        
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="与有理想的中国青年同行！"
+            android:textColor="#00FF00"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="雷鸣教育校训"
+            android:textSize="8pt" />
+         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="做最有责任心的教育专家！"
+            android:textColor="#00FF00"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autoLink="phone"
+            android:text="联系方式：   0394-7862006"
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=" QQ：2535883353"
+            android:textSize="8pt" />
+    </LinearLayout>
+
+</ScrollView>
