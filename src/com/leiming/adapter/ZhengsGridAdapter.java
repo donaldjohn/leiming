@@ -4,7 +4,7 @@
 package com.leiming.adapter;
 
 import com.leiming.search.R;
-import com.leiming.untill.Container;
+import com.leiming.utils.Container;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;

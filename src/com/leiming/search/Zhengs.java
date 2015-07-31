@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.leiming.adapter.GridAdapter;
 import com.leiming.adapter.ViewPagerAdapter;
 import com.leiming.adapter.ZhengsGridAdapter;
-import com.leiming.untill.Container;
+import com.leiming.utils.Container;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class Zhengs extends ActionBarActivity implements OnItemClickListener{

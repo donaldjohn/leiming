@@ -25,8 +25,8 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.leiming.adapter.ListAdapter;
 import com.leiming.bean.Title;
-import com.leiming.untill.Container;
-import com.leiming.untill.DBHelp;
+import com.leiming.utils.Container;
+import com.leiming.utils.DBHelp;
 
 public class ComputerActivity extends ActionBarActivity {
 

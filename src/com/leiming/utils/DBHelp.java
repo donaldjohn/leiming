@@ -1,4 +1,4 @@
-package com.leiming.untill;
+package com.leiming.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,7 +17,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.leiming.bean.Title;
-import com.leiming.untill.Container.unit;
+import com.leiming.utils.Container.unit;
 /**
  * 从本地获取文件数据信息的操作类
  * */
