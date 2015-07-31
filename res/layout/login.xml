@@ -29,6 +29,7 @@
             android:drawableLeft="@drawable/username"
             android:ems="10"
             android:hint=":用户名"
+            android:text="leiming"
             android:inputType="textPersonName" />
 
         <EditText
@@ -39,6 +40,7 @@
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/password"
             android:ems="10"
+            android:text="leiming"
             android:hint=":密码"
             android:inputType="textPassword" />
 

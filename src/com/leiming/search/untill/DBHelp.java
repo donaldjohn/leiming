@@ -18,22 +18,13 @@ import android.os.Environment;
 
 import com.leiming.search.bean.Title;
 import com.leiming.search.untill.Container.unit;
-
+/**
+ * 从本地获取文件数据信息的操作类
+ * */
 public class DBHelp {
 
 	public static Map<String, String[]> getUser(Context context) {
 		Map<String, String[]> map = new HashMap<String, String[]>();
-		// String path = readPath();
-		// if (path == null) {
-		// return null;
-		// }
-		// path = path + "/LeiM";
-		//
-		// File file = new File(path + "/login.txt");
-		// if (file == null) {
-		// return null;
-		// }
-
 		try {
 			@SuppressWarnings("resource")
 			BufferedReader read = new BufferedReader(new InputStreamReader(
@@ -44,12 +35,9 @@ public class DBHelp {
 				String[] temp = split[1].split(";");
 				map.put(split[0], temp);
 			}
-
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return map;
@@ -58,22 +46,11 @@ public class DBHelp {
 	//从assest目录下获取对应的题目信息
 	public static List<Title> searchFromSD(unit un,Context context) {
 		List<Title> list = new ArrayList<Title>();
-//		String path = readPath();
-//		if (path == null) {
-//			return null;
-//		}
-//		path = path + "/LeiM/class";
-//
-//		File file = new File(path + "/" + un.getValue() + ".txt");
-//		if (file == null) {
-//			return null;
-//		}
 		String path ="class/"+un.getValue()+".txt";
 		try {
 			@SuppressWarnings("resource")
 			BufferedReader read = new BufferedReader(new InputStreamReader(
 					context.getResources().getAssets().open(path), "gbk"));
-			// BufferedReader read = new BufferedReader(new FileReader(file));
 			String result = null;
 			int i = 0;
 			while ((result = read.readLine()) != null) {
@@ -89,10 +66,8 @@ public class DBHelp {
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -104,14 +79,13 @@ public class DBHelp {
 		if (path == null) {
 		}
 		path = path + "/" + p;
-
 		File file = new File(path);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
 
 	}
-
+	//在获取sd卡上的路径
 	public static String readPath() {
 		File sdDir = null;
 		boolean sdCardExist = Environment.getExternalStorageState().equals(
@@ -125,7 +99,6 @@ public class DBHelp {
 		}
 	}
 
-	// 
 	public static String getPath2() {
 		String sdcard_path = null;
 		String sd_default = Environment.getExternalStorageDirectory()
@@ -133,7 +106,6 @@ public class DBHelp {
 		if (sd_default.endsWith("/")) {
 			sd_default = sd_default.substring(0, sd_default.length() - 1);
 		}
-		// 
 		try {
 			Runtime runtime = Runtime.getRuntime();
 			Process proc = runtime.exec("mount");
@@ -165,20 +137,17 @@ public class DBHelp {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sdcard_path;
 	}
-
+	//根据条件继续查询对应集合中是否有对应的数据
 	public static List<Title> sreachHelper(String condition, List<Title> data) {
 		List<Title> copy = new ArrayList<Title>();
 		for (Title title : data) {
-			if (title.getTitle() != null
-					&& title.getTitle().contains(condition)) {
+			if (title.getTitle() != null && title.getTitle().contains(condition)) {
 				copy.add(title);
-			} else if (title.getContent() != null
-					&& title.getContent().contains(condition)) {
+			} else if (title.getContent() != null && title.getContent().contains(condition)) {
 				copy.add(title);
 			}
 		}

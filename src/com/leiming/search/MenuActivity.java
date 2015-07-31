@@ -1,3 +1,7 @@
+/**
+ * 主菜单界面
+ * @zcs
+ * */
 package com.leiming.search;
 
 import android.annotation.SuppressLint;
@@ -27,13 +31,12 @@ public class MenuActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
 		initData();
 		initActionbar();
 	}
-
+	//加载菜单上面的文字描述
 	private void initData() {
 		gridview = (GridView) findViewById(R.id.gridView1);
 		Intent intent = getIntent();
@@ -49,7 +52,6 @@ public class MenuActivity extends ActionBarActivity {
 			adapter = new GridAdapter(getApplicationContext(), data,0);
 			gridview.setOnItemClickListener(itemclick2);
 		}
-		
 		gridview.setAdapter(adapter);
 	}
 
@@ -77,8 +79,7 @@ public class MenuActivity extends ActionBarActivity {
 			switch (postions) {
 			case 4:
 				if (!Container.limit[Container.current_user].contains(unit.TEACHER.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 				} else {
 					intent.setClass(MenuActivity.this, ComputerActivity.class);
 					Container.current_unit = unit.TEACHER;
@@ -87,8 +88,7 @@ public class MenuActivity extends ActionBarActivity {
 				break;
 			case 1:
 				if (!Container.limit[Container.current_user].contains(unit.COMPUTER.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 				} else {
 					intent.setClass(MenuActivity.this, ComputerActivity.class);
 					Container.current_unit = unit.COMPUTER;
@@ -97,8 +97,7 @@ public class MenuActivity extends ActionBarActivity {
 				break;
 			case 2:
 				if (!Container.limit[Container.current_user].contains(unit.ACCOUNTING.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 				} else {
 					intent.setClass(MenuActivity.this, ComputerActivity.class);
 					Container.current_unit = unit.ACCOUNTING;
@@ -107,8 +106,7 @@ public class MenuActivity extends ActionBarActivity {
 				break;
 			case 3:
 				if (!Container.limit[Container.current_user].contains(unit.EXAM.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 				} else {
 					intent.setClass(MenuActivity.this, MenuActivity.class);
 					intent.putExtra("tag", "EXMA");
@@ -127,10 +125,8 @@ public class MenuActivity extends ActionBarActivity {
 				startActivity(intent);
 				break;
 			default:
-				Toast.makeText(getApplicationContext(), "权限不够", Toast.LENGTH_LONG)
-						.show();
+				Toast.makeText(getApplicationContext(), "权限不够", Toast.LENGTH_LONG).show();
 				break;
-
 			}
 
 		}
@@ -152,25 +148,18 @@ public class MenuActivity extends ActionBarActivity {
 					Container.current_unit = unit.TEACHER;
 					startActivity(intent);
 				}
-		
-
 		}
-		
 	};
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
-
 			finish();
-
 			break;
 		default:
 			break;
 		}
-
 		return true;
 	}
 

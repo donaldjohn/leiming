@@ -27,7 +27,6 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		DBHelp.intFile("/LeiM");
@@ -38,7 +37,7 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 		initClicke();
 		Transaction.transfAnimation(logo, login_area);
 	}
-
+	//获取当前登录文件中存储的用户
 	private void initUser() {
 		//进行读取asset文件夹下面的login文件，获取所有的用户账号，密码以及权限
 		Map<String, String[]> map = DBHelp.getUser(this);
@@ -46,17 +45,10 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 		Container.pwd = map.get("password");
 		Container.limit = map.get("limit");
 	}
-
+	
 	private void initActionBar() {
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.hide();
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
-		super.onWindowFocusChanged(hasFocus);
-
 	}
 
 	private void initView() {
@@ -72,32 +64,19 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 	private void initClicke() {
 		login.setOnClickListener(this);
 	}
-
+	//登录判断
 	@Override
 	public void onClick(View view) {
-		// TODO Auto-generated method stub
 		if (Container.getstatus(this))
 			return;
-
 		switch (view.getId()) {
 		case R.id.login:
 			if (Container.username == null) {
 				Toast.makeText(getApplicationContext(), "用户名为空",
 						Toast.LENGTH_LONG).show();
 			} else {
-				// if (username.getText() != null
-				// && username.getText().toString().equals(Container.username)
-				// && password.getText() != null
-				// && password.getText().toString().equals(Container.pwd)) {
-				//
-				// }else {
-				// Toast.makeText(getApplicationContext(), "用户资料不全",
-				// Toast.LENGTH_LONG).show();
-				// }
-
 				try {
-					if (username.getText() != null
-							&& password.getText() != null) {
+					if (username.getText() != null&& password.getText() != null) {
 						//遍历所有的用户进行判断是否通过验证登录
 						for (int count = 0; count < Container.username.length; count++) {
 							if (username.getText().toString().equals(Container.username[count])) {
@@ -108,16 +87,13 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 								}
 							}
 						}
-						Toast.makeText(getApplicationContext(), "账户密码错误",
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "账户密码错误",Toast.LENGTH_LONG).show();
 					}
-				} catch (Exception e) {
-					Toast.makeText(getApplicationContext(), "账户设置有问题",
-							Toast.LENGTH_LONG).show();
+				} catch (Exception e){
+					Toast.makeText(getApplicationContext(), "账户设置有问题",Toast.LENGTH_LONG).show();
 				}
 			}
 			break;
-
 		default:
 			break;
 		}

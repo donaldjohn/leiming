@@ -1,3 +1,6 @@
+/**
+ * 包换一些书
+ * */
 package com.leiming.search.untill;
 
 import java.text.SimpleDateFormat;
@@ -67,13 +70,13 @@ public class Container {
 	final public static DisplayImageOptions adUrl_options = new DisplayImageOptions.Builder()
 			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
 			.displayer(new RoundedBitmapDisplayer(20))
-			// 是否设置为圆角，弧度为多少
+			//是否设置为圆角，弧度为多少
 			.cacheInMemory().cacheOnDisc().build();
 
 	final public static DisplayImageOptions adUrl = new DisplayImageOptions.Builder()
 			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
 			.cacheInMemory().cacheOnDisc().build();
-
+	//所有的证书图pain数据
 	public static String[] url = new String[] { "assets://1.jpg",
 			"assets://2.jpg", "assets://3.jpg", "assets://4.jpg",
 			"assets://5.jpg", "assets://6.jpg", "assets://7.jpg",

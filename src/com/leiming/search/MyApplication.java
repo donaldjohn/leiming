@@ -11,7 +11,6 @@ public class MyApplication extends Application {
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				getApplicationContext()).threadPoolSize(7)
@@ -19,7 +18,6 @@ public class MyApplication extends Application {
 				.denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 				.tasksProcessingOrder(QueueProcessingType.LIFO).build();
-		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
 	}
 

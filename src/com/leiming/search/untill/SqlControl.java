@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.leiming.search.bean.Title;
 
+/**
+ * 数据库操作类
+ * */
 public class SqlControl {
 	SQLiteDatabase data;
 	SqlHelp help;
@@ -16,7 +19,6 @@ public class SqlControl {
 	}
 	
 	public void write(){
-	
 	}
 	
 	public void read(){
@@ -26,7 +28,6 @@ public class SqlControl {
 	public void insert(List<Title> list,String type){
 		data=help.getWritableDatabase();
 		data.beginTransaction();        //手动设置开始事务
-
 		//数据插入操作循环
 		for(Title title :list){
 		}

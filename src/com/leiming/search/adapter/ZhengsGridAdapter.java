@@ -1,6 +1,7 @@
-
+/**
+ * 证书显示的adapter
+ * */
 package com.leiming.search.adapter;
-
 
 import com.leiming.search.R;
 import com.leiming.search.untill.Container;
@@ -18,42 +19,35 @@ import android.widget.TextView;
 public class ZhengsGridAdapter extends BaseAdapter{
 
 	Context context;
-	String [] img;
+	String [] img; //所有证书图片对应的路径url
 
-	
 	public ZhengsGridAdapter(Context context){
 		this.context =context;
 		img=Container.url;
 	}
 	
-	
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return img.length;
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return img[arg0];
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return img.length;
 	}
 
 	@Override
 	public View getView(int potions, View convertView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		if(convertView ==null){
 			convertView =LayoutInflater.from(context).inflate(R.layout.grid_item2, null);
 		}
-		
 		ImageView icon =(ImageView) convertView.findViewById(R.id.grid_img);
-		
+		//使用开源的框架进行设置显示的数据
 		ImageLoader.getInstance().displayImage(img[potions], icon, Container.adUrl_options);
 		return convertView;
 	}

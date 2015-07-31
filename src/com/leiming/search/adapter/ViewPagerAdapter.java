@@ -11,20 +11,8 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-
 /**
- * 
- * @{# ViewPagerAdapter.java Create on 2013-5-2 下午11:03:39
- * 
- *     class desc: 引导页面适配�?
- * 
- *     <p>
- *     Copyright: Copyright(c) 2013
- *     </p>
- * @Version 1.0
- * @Author <a href="mailto:gaolei_xj@163.com">Leo</a>
- * 
- * 
+ *  证书数据显示viewPager的adapter
  */
 public class ViewPagerAdapter extends PagerAdapter {
 
@@ -40,7 +28,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 		this.postions =postion;
 	}
 
-	// �?��arg1位置的界�?
 	@Override
 	public void destroyItem(View arg0, int arg1, Object arg2) {
 		((ViewPager) arg0).removeView(views.get(arg1));
@@ -49,8 +36,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 	@Override
 	public void finishUpdate(View arg0) {
 	}
-
-	// 获得当前界面�?
 	@Override
 	public int getCount() {
 		if (views != null) {
@@ -58,16 +43,12 @@ public class ViewPagerAdapter extends PagerAdapter {
 		}
 		return 0;
 	}
-
-	// 初始化arg1位置的界�?
 	@Override
 	public Object instantiateItem(View arg0, int arg1) {
 		((ViewPager) arg0).addView(views.get(arg1), 0);
 		return views.get(arg1);
 	}
 
-
-	// 判断是否由对象生成界�?
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
 		return (arg0 == arg1);

@@ -1,3 +1,6 @@
+/**
+ * 显示试题的listView
+ * */
 package com.leiming.search.adapter;
 
 import java.util.List;
@@ -38,42 +41,35 @@ public class ListAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return data.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return data.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public View getView(int postions, View converView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 
 		ViewHolder holder;
 		if (converView == null) {
 			holder = new ViewHolder();
-			converView = LayoutInflater.from(context).inflate(
-					R.layout.list_item, null);
+			converView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 			holder.tv_title = (TextView) converView.findViewById(R.id.lv_title);
-			holder.tv_context = (TextView) converView
-					.findViewById(R.id.lv_content);
+			holder.tv_context = (TextView) converView.findViewById(R.id.lv_content);
 			converView.setTag(holder);
 		} else {
 			holder = (ViewHolder) converView.getTag();
 		}
-
 		String title = data.get(postions).getTitle();
 		String content = data.get(postions).getContent();
-
+		//根据查询的数据设置显示条目的样式
 		if (title != null) {
 			SpannableString msp = new SpannableString(title);
 			int start = title.indexOf(sreach);
@@ -97,8 +93,6 @@ public class ListAdapter extends BaseAdapter {
 		} else {
 			holder.tv_context.setText("");
 		}
-		// 设置字体背景色
-
 		return converView;
 	}
 

@@ -23,7 +23,6 @@ public class DetailActivity extends ActionBarActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail);
 		initView();
@@ -35,12 +34,12 @@ public class DetailActivity extends ActionBarActivity{
 		tv_sreach =(TextView) findViewById(R.id.select);
 		tv_title =(TextView) findViewById(R.id.title);
 		tv_content =(TextView) findViewById(R.id.content);
-		
 	}
 	
 	private void getData(){
 		Intent intent =getIntent();
 		if(intent!=null){
+			//获取传递过来的数据
 			Title title =(Title) intent.getSerializableExtra("title");
 			String sreach =intent.getStringExtra("sreach");
 			tv_sreach.setText(sreach!=null?sreach:"");
@@ -49,6 +48,7 @@ public class DetailActivity extends ActionBarActivity{
 				String content =title.getContent();
 				if(t!=null){
 					SpannableString msp = new SpannableString(t);
+					//判断当前的数据中是否有查询的数据字段，如果有更改样式
 					int start=t.indexOf(sreach);
 					if(start !=-1){
 						msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  //设置背景色为青色 
@@ -88,17 +88,11 @@ public class DetailActivity extends ActionBarActivity{
 		actionbar.setTitle("搜索结果");
 	}
 	
-	
-
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()){
 		case android.R.id.home:
-
 			finish();
-
 			break;
 		default:
 			break;

@@ -15,7 +15,7 @@ public class GridAdapter extends BaseAdapter {
 	Context context;
 	String[] titles;
 	int[] img;
-
+	//初始化主菜单要显示的数据
 	public GridAdapter(Context context, String[] titles) {
 		this.context = context;
 		this.titles = titles;
@@ -23,12 +23,10 @@ public class GridAdapter extends BaseAdapter {
 				R.drawable.invoice, R.drawable.student_id, R.drawable.teachers,
 				R.drawable.address_book };
 	}
-
+	//初始化统考类菜单下面的子菜单
 	public GridAdapter(Context context, String[] titles, int i) {
 		this.context = context;
 		this.titles = titles;
-		// data = new String[] {"关于我们","计算机二级","会计证","统考类","教师资格证","证书展示" };
-
 		img = new int[] { R.drawable.address_book_detail,
 				R.drawable.address_book_detail, R.drawable.address_book_detail,
 				R.drawable.address_book_detail, R.drawable.address_book_detail,
@@ -38,30 +36,25 @@ public class GridAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return titles.length;
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return titles[arg0];
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return titles.length;
 	}
 
 	@Override
 	public View getView(int potions, View convertView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.grid_item, null);
 		}
-
 		ImageView icon = (ImageView) convertView.findViewById(R.id.grid_img);
 		TextView title = (TextView) convertView.findViewById(R.id.grid_item);
 
