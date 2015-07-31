@@ -1,7 +1,7 @@
 /**
  * ¶¯»­
  * */
-package com.leiming.search.animotion;
+package com.leiming.animotion;
 
 import android.view.View;
 import android.view.animation.AlphaAnimation;

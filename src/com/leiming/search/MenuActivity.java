@@ -18,9 +18,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.leiming.search.adapter.GridAdapter;
-import com.leiming.search.untill.Container;
-import com.leiming.search.untill.Container.unit;
+import com.leiming.adapter.GridAdapter;
+import com.leiming.untill.Container;
+import com.leiming.untill.Container.unit;
 
 public class MenuActivity extends ActionBarActivity {
 

@@ -1,7 +1,7 @@
 /**
  * ÏÔÊ¾ÊÔÌâµÄlistView
  * */
-package com.leiming.search.adapter;
+package com.leiming.adapter;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import android.widget.BaseAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.leiming.bean.Title;
 import com.leiming.search.R;
-import com.leiming.search.bean.Title;
 
 public class ListAdapter extends BaseAdapter {
 

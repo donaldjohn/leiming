@@ -1,7 +1,7 @@
 /**
  * 数据实体，对应每条显示的数据，包括标题，和内容两部分
  * */
-package com.leiming.search.bean;
+package com.leiming.bean;
 
 import java.io.Serializable;
 

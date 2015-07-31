@@ -1,10 +1,10 @@
 /**
  * 证书显示的adapter
  * */
-package com.leiming.search.adapter;
+package com.leiming.adapter;
 
 import com.leiming.search.R;
-import com.leiming.search.untill.Container;
+import com.leiming.untill.Container;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;

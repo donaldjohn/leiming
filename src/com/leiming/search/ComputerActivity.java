@@ -23,10 +23,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.leiming.search.adapter.ListAdapter;
-import com.leiming.search.bean.Title;
-import com.leiming.search.untill.Container;
-import com.leiming.search.untill.DBHelp;
+import com.leiming.adapter.ListAdapter;
+import com.leiming.bean.Title;
+import com.leiming.untill.Container;
+import com.leiming.untill.DBHelp;
 
 public class ComputerActivity extends ActionBarActivity {
 

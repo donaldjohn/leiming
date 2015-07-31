@@ -23,10 +23,10 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.leiming.search.adapter.GridAdapter;
-import com.leiming.search.adapter.ViewPagerAdapter;
-import com.leiming.search.adapter.ZhengsGridAdapter;
-import com.leiming.search.untill.Container;
+import com.leiming.adapter.GridAdapter;
+import com.leiming.adapter.ViewPagerAdapter;
+import com.leiming.adapter.ZhengsGridAdapter;
+import com.leiming.untill.Container;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class Zhengs extends ActionBarActivity implements OnItemClickListener{

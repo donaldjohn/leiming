@@ -1,7 +1,7 @@
 /**
  * 包换一些书
  * */
-package com.leiming.search.untill;
+package com.leiming.untill;
 
 import java.text.SimpleDateFormat;
 import java.util.Map;
@@ -66,7 +66,7 @@ public class Container {
 			}
 		}
 	}
-
+	//universalimageloader进行加载图片设置的配置信息
 	final public static DisplayImageOptions adUrl_options = new DisplayImageOptions.Builder()
 			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
 			.displayer(new RoundedBitmapDisplayer(20))

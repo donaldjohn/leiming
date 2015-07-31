@@ -1,4 +1,4 @@
-package com.leiming.search.adapter;
+package com.leiming.adapter;
 
 import java.util.List;
 

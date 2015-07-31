@@ -13,7 +13,7 @@ import android.text.style.BackgroundColorSpan;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.leiming.search.bean.Title;
+import com.leiming.bean.Title;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class DetailActivity extends ActionBarActivity{

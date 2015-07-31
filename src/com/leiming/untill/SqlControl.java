@@ -1,4 +1,4 @@
-package com.leiming.search.untill;
+package com.leiming.untill;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.leiming.search.bean.Title;
+import com.leiming.bean.Title;
 
 /**
  * 数据库操作类
