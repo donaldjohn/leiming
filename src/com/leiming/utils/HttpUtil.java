@@ -62,7 +62,11 @@ public class HttpUtil {
 	
 	//获取httpclient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
-	public static final String BASE_URL = "http://10.18.1.103:8080/leimingService";
+	//home的地址
+	//public static final String BASE_URL = "http://10.18.1.103:8080/leimingService";
+	//服务器的地址
+	public static final String BASE_URL = "http://123.57.81.43:8090/leimingService";
+	//公司的地址
 	
 	//设置httpClient的参数
 	public static void setHtppClientParmas(){

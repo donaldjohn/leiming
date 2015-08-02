@@ -54,7 +54,7 @@ public class DBHelp {
 			String result = null;
 			int i = 0;
 			while ((result = read.readLine()) != null) {
-				System.out.println(i);
+				//System.out.println(i);
 				i++;
 				String[] split = result.split("&&");
 				Title title = new Title();

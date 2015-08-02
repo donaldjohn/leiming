@@ -30,8 +30,9 @@ import com.leiming.utils.DBHelp;
 
 /**
  * 各选项功能的数据显示界面
+ * 显示某一个类别下的所有的试题
  * */
-public class ComputerActivity extends ActionBarActivity {
+public class TitlesActivity extends ActionBarActivity {
 
 	ListAdapter adapter = null;
 	ListView lv; //显示搜索结果
@@ -80,7 +81,7 @@ public class ComputerActivity extends ActionBarActivity {
 					long arg3) {
 				Title title = data.get(arg2);
 				Intent intent = new Intent();
-				intent.setClass(ComputerActivity.this, DetailActivity.class);
+				intent.setClass(TitlesActivity.this, DetailActivity.class);
 				//将当前点击的数据的实体类传递过去
 				intent.putExtra("title", title);
 				intent.putExtra("sreach", et.getText().toString());
@@ -93,13 +94,13 @@ public class ComputerActivity extends ActionBarActivity {
 	private TextWatcher textWatcher = new TextWatcher() {
 		@Override
 		public void afterTextChanged(Editable s) {
-			Log.d("TAG", "afterTextChanged--------------->");
+			//Log.d("TAG", "afterTextChanged--------------->");
 		}
 
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
 				int after) {
-			Log.d("TAG", "beforeTextChanged--------------->");
+			//Log.d("TAG", "beforeTextChanged--------------->");
 		}
 		/*
 		 * 当输入内容变化的时候进行更新listView中的数据已达到搜索的目的
@@ -108,7 +109,7 @@ public class ComputerActivity extends ActionBarActivity {
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
-			Log.d("TAG", "onTextChanged--------------->");
+			//Log.d("TAG", "onTextChanged--------------->");
 			String change = s.toString();
 		    //设置字体背景色 
 			data.clear();
@@ -124,7 +125,6 @@ public class ComputerActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();

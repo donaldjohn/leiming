@@ -1,19 +1,13 @@
 package com.leiming.search;
 
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,9 +18,6 @@ import android.widget.Toast;
 import com.leiming.animotion.Transaction;
 import com.leiming.control.UserControl;
 import com.leiming.utils.AppUtil;
-import com.leiming.utils.Container;
-import com.leiming.utils.DBHelp;
-import com.leiming.utils.LogUser;
 import com.leiming.widget.CustomProgressDialog;
 
 /**

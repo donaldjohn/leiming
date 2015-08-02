@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.leiming.bean.Title;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 题目详情界面

@@ -25,7 +25,7 @@
         <activity 
             android:name="com.leiming.search.MenuActivity"
             ></activity>
-        <activity android:name="com.leiming.search.ComputerActivity" />
+        <activity android:name="com.leiming.search.TitlesActivity" />
         <activity android:name="com.leiming.search.DetailActivity" />
         <activity android:name="com.leiming.search.Zhengs"></activity>
         <activity android:name="com.leiming.search.AboutUs"></activity>

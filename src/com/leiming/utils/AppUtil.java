@@ -70,4 +70,10 @@ public class AppUtil extends Activity{
 		Log.i(tag, content);
 	}
 	
+	//info级别的信息
+	public final static void printI(String tag,String msg){
+		Log.i(tag, msg);
+	}	
+	
+	
 }
