@@ -13,11 +13,11 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".LoginActivity_ZCS"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar"
+             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

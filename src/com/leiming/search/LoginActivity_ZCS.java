@@ -40,7 +40,6 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_zcs);
-
 		init();
 		//对logo以及帐号填写区域进行设置动画
 		Transaction.transfAnimation(logo, login_area);

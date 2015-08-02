@@ -58,7 +58,7 @@ public class HttpUtil {
 	 * */
 	public static final int NETPARSEERROR = -1004;
 	//连接超时设置时间
-	public static final int TIME_OUT_DELAY = 5000 ;
+	public static final int TIME_OUT_DELAY = 5000;
 	
 	//获取httpclient对象
 	public static HttpClient httpClient = new DefaultHttpClient();

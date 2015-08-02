@@ -61,7 +61,7 @@ public class MenuActivity extends ActionBarActivity {
 	private void initActionbar() {
 		actionbar = getSupportActionBar();
 		actionbar.setHomeButtonEnabled(true);
-		actionbar.setIcon(R.drawable.back);
+		//actionbar.setIcon(R.drawable.back);
 		actionbar.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.top));
 		int titleId = Resources.getSystem().getIdentifier("action_bar_title",
