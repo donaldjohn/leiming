@@ -1,7 +1,4 @@
-/**
- * 主菜单界面
- * @zcs
- * */
+
 package com.leiming.search;
 
 import android.annotation.SuppressLint;
@@ -21,7 +18,10 @@ import android.widget.Toast;
 import com.leiming.adapter.GridAdapter;
 import com.leiming.utils.Container;
 import com.leiming.utils.Container.unit;
-
+/**
+ * 主菜单界面
+ * @zcs
+ * */
 public class MenuActivity extends ActionBarActivity {
 
 	GridView gridview;

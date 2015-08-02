@@ -16,7 +16,7 @@ import android.util.Log;
  * */
 public class AppUtil extends Activity{
 
-	private static AppUtil appUtil;
+	/*private static AppUtil appUtil;
 	
     private AppUtil() {
 
@@ -27,10 +27,10 @@ public class AppUtil extends Activity{
 			appUtil = new AppUtil();
 		}
 		return appUtil;
-	}
+	}*/
 	//ªÒ»°macµÿ÷∑
-	public final String getLocalMacAddress() {  
-        WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);  
+	public static final String getLocalMacAddress(Context context) {  
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);  
         WifiInfo info = wifi.getConnectionInfo();  
         return info.getMacAddress();  
     }  

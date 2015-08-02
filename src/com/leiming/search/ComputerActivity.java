@@ -28,6 +28,9 @@ import com.leiming.bean.Title;
 import com.leiming.utils.Container;
 import com.leiming.utils.DBHelp;
 
+/**
+ * 各选项功能的数据显示界面
+ * */
 public class ComputerActivity extends ActionBarActivity {
 
 	ListAdapter adapter = null;

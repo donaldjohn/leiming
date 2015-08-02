@@ -18,6 +18,7 @@ import com.leiming.animotion.Transaction;
 import com.leiming.utils.Container;
 import com.leiming.utils.DBHelp;
 
+@Deprecated
 public class LoginActivity extends ActionBarActivity implements OnClickListener {
 
 	EditText username, password;
