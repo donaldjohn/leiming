@@ -1,6 +1,7 @@
 package com.leiming.search;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leiming.animotion.Transaction;
+import com.leiming.asynctask.BaseAsyncTask;
 import com.leiming.control.UserControl;
 import com.leiming.utils.AppUtil;
 import com.leiming.widget.CustomProgressDialog;
@@ -101,7 +103,7 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 			String usernameValue = username.getText().toString();
 			String mac = AppUtil.getLocalMacAddress(getApplicationContext());
 			if( !TextUtils.isEmpty(usernameValue) ){
-				userTask = new UserTask();
+				userTask = new UserTask(getApplicationContext());
 				if( login.getText().equals("登陆") ){
 					//如果是登陆则进入登陆的判断
 					//LogUser.printI("mac", mac);
@@ -127,11 +129,13 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 	
 	//用于登录时，使用AsyncTask进行判断用户名和密码以及显示关闭进度条
 	//同时注册的判断也是走这里的
-    private final class UserTask extends AsyncTask<String, Integer, String>{
+    private final class UserTask extends BaseAsyncTask{
     	
     	//记录当前是登录还是注册的状态值
     	private String state = null;
-    	public UserTask() {}
+    	public UserTask(Context context) {
+    		super(context);
+    	}
 		//相当于在子线程中进行调用的过程
 		protected String doInBackground(String... params){//子线程中执行的
 				//调用service进行返回登录结果

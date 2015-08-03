@@ -207,6 +207,7 @@ public class HttpUtil {
 			return futureTask.get(); //获取futrueTask执行后返回的数据信息
 		}else{
 			//如果没有网直接返回对应的状态值
+			sbt.State = HttpUtil.NONETWORKS+"";
 			return sbt;
 		}
 		
