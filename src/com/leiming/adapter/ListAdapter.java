@@ -1,6 +1,4 @@
-/**
- * 显示试题的listView
- * */
+
 package com.leiming.adapter;
 
 import java.util.List;
@@ -18,8 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.leiming.bean.Title;
+import com.leiming.bean.Title;
 import com.leiming.search.R;
-
+/**
+ * 显示试题的listView
+ * */
 public class ListAdapter extends BaseAdapter {
 
 	Context context;
@@ -74,8 +75,8 @@ public class ListAdapter extends BaseAdapter {
 			SpannableString msp = new SpannableString(title);
 			int start = title.indexOf(sreach);
 			if (start != -1) {
-				msp.setSpan(new BackgroundColorSpan(Color.RED), start, start
-						+ sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置背景色为青色
+				// 设置背景色为青色
+				msp.setSpan(new BackgroundColorSpan(Color.RED), start, start + sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
 			}
 			holder.tv_title.setText(msp);
 		} else {
@@ -86,8 +87,8 @@ public class ListAdapter extends BaseAdapter {
 			SpannableString msp = new SpannableString(content);
 			int start = content.indexOf(sreach);
 			if (start != -1) {
-				msp.setSpan(new BackgroundColorSpan(Color.RED), start, start
-						+ sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置背景色为青色
+				// 设置背景色为青色
+				msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+ sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
 			}
 			holder.tv_context.setText(msp);
 		} else {

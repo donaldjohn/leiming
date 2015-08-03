@@ -16,7 +16,7 @@ import android.util.Log;
  * */
 public class AppUtil extends Activity{
 
-	private static AppUtil appUtil;
+	/*private static AppUtil appUtil;
 	
     private AppUtil() {
 
@@ -27,10 +27,10 @@ public class AppUtil extends Activity{
 			appUtil = new AppUtil();
 		}
 		return appUtil;
-	}
+	}*/
 	//获取mac地址
-	public final String getLocalMacAddress() {  
-        WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);  
+	public static final String getLocalMacAddress(Context context) {  
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);  
         WifiInfo info = wifi.getConnectionInfo();  
         return info.getMacAddress();  
     }  
@@ -69,5 +69,11 @@ public class AppUtil extends Activity{
 	public static void logInfo(String tag,String content){
 		Log.i(tag, content);
 	}
+	
+	//info级别的信息
+	public final static void printI(String tag,String msg){
+		Log.i(tag, msg);
+	}	
+	
 	
 }

@@ -58,11 +58,15 @@ public class HttpUtil {
 	 * */
 	public static final int NETPARSEERROR = -1004;
 	//连接超时设置时间
-	public static final int TIME_OUT_DELAY = 5000 ;
+	public static final int TIME_OUT_DELAY = 5000;
 	
 	//获取httpclient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
-	public static final String BASE_URL = "http://192.168.15.117:8090/campusknowallService";
+	//home的地址
+	//public static final String BASE_URL = "http://10.18.1.103:8080/leimingService";
+	//服务器的地址
+	public static final String BASE_URL = "http://123.57.81.43:8090/leimingService";
+	//公司的地址
 	
 	//设置httpClient的参数
 	public static void setHtppClientParmas(){
@@ -179,7 +183,6 @@ public class HttpUtil {
 								result=new String(result.getBytes("ISO-8859-1"),"UTF-8");
 								sbt.outStringContent = result;
 							}
-							
 							return sbt;
 						}
 					}catch(ConnectTimeoutException e){  

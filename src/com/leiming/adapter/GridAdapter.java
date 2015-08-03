@@ -10,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 应用菜单的适配器
+ * */
 public class GridAdapter extends BaseAdapter {
 
 	Context context;

@@ -65,6 +65,28 @@ public class Container {
 				return EXAMH.getValue();
 			}
 		}
+		
+		public unit postionToEnum(int postions){
+			switch (postions) {
+			case 0:
+				return EXAMA;
+			case 1:
+				return EXAMB;
+			case 2:
+				return EXAMC;
+			case 3:
+				return EXAMD;
+			case 4:
+				return EXAME;
+			case 5:
+				return EXAMF;
+			case 6:
+				return EXAMG;
+			default:
+				return EXAMH;
+			}
+		}
+		
 	}
 	//universalimageloader进行加载图片设置的配置信息
 	final public static DisplayImageOptions adUrl_options = new DisplayImageOptions.Builder()

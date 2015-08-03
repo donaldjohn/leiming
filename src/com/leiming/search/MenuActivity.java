@@ -1,7 +1,4 @@
-/**
- * 主菜单界面
- * @zcs
- * */
+
 package com.leiming.search;
 
 import android.annotation.SuppressLint;
@@ -19,9 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leiming.adapter.GridAdapter;
+import com.leiming.bean.Constants;
+import com.leiming.utils.AppUtil;
 import com.leiming.utils.Container;
 import com.leiming.utils.Container.unit;
-
+/**
+ * 主菜单界面
+ * @zcs
+ * */
 public class MenuActivity extends ActionBarActivity {
 
 	GridView gridview;
@@ -59,7 +61,7 @@ public class MenuActivity extends ActionBarActivity {
 	private void initActionbar() {
 		actionbar = getSupportActionBar();
 		actionbar.setHomeButtonEnabled(true);
-		actionbar.setIcon(R.drawable.back);
+		//actionbar.setIcon(R.drawable.back);
 		actionbar.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.top));
 		int titleId = Resources.getSystem().getIdentifier("action_bar_title",
@@ -75,62 +77,68 @@ public class MenuActivity extends ActionBarActivity {
 		public void onItemClick(AdapterView<?> arg0, View arg1, int postions,
 				long arg3) {
 			Intent intent = new Intent();
+			//获取当前用户的权限
+			String userPermission = AppUtil.getLocalSPF(getApplicationContext()).getString(Constants.USER_PERMISSION, "");
+			AppUtil.logInfo("userPersiion", userPermission);
 			//根据当前登录的用户从limit中获取对应的权限，然后进行比对，如果是当前点击的功能和权限匹配那么就能够使用对应的功能
 			switch (postions) {
-			case 4:
-				if (!Container.limit[Container.current_user].contains(unit.TEACHER.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
-				} else {
-					intent.setClass(MenuActivity.this, ComputerActivity.class);
-					Container.current_unit = unit.TEACHER;
+				case 4:
+					//教师资格证
+					if (!userPermission.contains(unit.TEACHER.getValue())) {
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+					} else {
+						intent.setClass(MenuActivity.this, TitlesActivity.class);
+						Container.current_unit = unit.TEACHER;
+						startActivity(intent);
+					}
+					break;
+				case 1:
+					//计算机二级
+					if (!userPermission.contains(unit.COMPUTER.getValue())) {
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+					} else {
+						intent.setClass(MenuActivity.this, TitlesActivity.class);
+						Container.current_unit = unit.COMPUTER;
+						startActivity(intent);
+					}
+					break;
+				case 2:
+					//会计证
+					if (!userPermission.contains(unit.ACCOUNTING.getValue())) {
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+					} else {
+						intent.setClass(MenuActivity.this, TitlesActivity.class);
+						Container.current_unit = unit.ACCOUNTING;
+						startActivity(intent);
+					}
+					break;
+				case 3:
+					//统考类
+					if (!userPermission.contains(unit.EXAM.getValue())) {
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+					} else {
+						intent.setClass(MenuActivity.this, MenuActivity.class);
+						//设置一个标示，说明当前要显示的是统考类的功能界面
+						intent.putExtra("tag", "EXMA");
+						Container.current_unit = unit.EXAM;
+						startActivity(intent);
+					}
+					break;
+				case 0:
+					//关于我们
+					intent.setClass(MenuActivity.this, AboutUs.class);
 					startActivity(intent);
-				}
-				break;
-			case 1:
-				if (!Container.limit[Container.current_user].contains(unit.COMPUTER.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
-				} else {
-					intent.setClass(MenuActivity.this, ComputerActivity.class);
-					Container.current_unit = unit.COMPUTER;
+					break;
+				case 5:
+					//证书展示
+					intent.setClass(MenuActivity.this, Zhengs.class);
 					startActivity(intent);
-				}
-				break;
-			case 2:
-				if (!Container.limit[Container.current_user].contains(unit.ACCOUNTING.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
-				} else {
-					intent.setClass(MenuActivity.this, ComputerActivity.class);
-					Container.current_unit = unit.ACCOUNTING;
-					startActivity(intent);
-				}
-				break;
-			case 3:
-				if (!Container.limit[Container.current_user].contains(unit.EXAM.getValue())) {
-					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
-				} else {
-					intent.setClass(MenuActivity.this, MenuActivity.class);
-					intent.putExtra("tag", "EXMA");
-					Container.current_unit = unit.EXAM;
-					startActivity(intent);
-				}
-				break;
-			case 0:
-				intent.setClass(MenuActivity.this, AboutUs.class);
-				Container.current_unit = unit.COMPUTER;
-				startActivity(intent);
-				break;
-			case 5:
-				intent.setClass(MenuActivity.this, Zhengs.class);
-				Container.current_unit = unit.COMPUTER;
-				startActivity(intent);
-				break;
-			default:
-				Toast.makeText(getApplicationContext(), "权限不够", Toast.LENGTH_LONG).show();
-				break;
+					break;
+				default:
+					Toast.makeText(getApplicationContext(), "权限不够", Toast.LENGTH_LONG).show();
+					break;
 			}
-
 		}
-		
 	};
 	//统考类下所有功能对应的点击事件
 	OnItemClickListener itemclick2 =new OnItemClickListener() {
@@ -140,12 +148,14 @@ public class MenuActivity extends ActionBarActivity {
 				long arg3) {
 			//获取当前的点击的功能对应要求的权限值
 			String limit =unit.EXAM.getEXAMlimit(postions);
+			//获取当前用户的权限
+			String userPermission = AppUtil.getLocalSPF(getApplicationContext()).getString(Constants.USER_PERMISSION, "");
 			Intent intent = new Intent();
-				if (!Container.limit[Container.current_user].contains(limit)) {
+				if (!userPermission.contains(limit)) {
 					Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 				} else {
-					intent.setClass(MenuActivity.this, ComputerActivity.class);
-					Container.current_unit = unit.TEACHER;
+					intent.setClass(MenuActivity.this, TitlesActivity.class);
+					Container.current_unit = unit.EXAM.postionToEnum(postions);
 					startActivity(intent);
 				}
 		}

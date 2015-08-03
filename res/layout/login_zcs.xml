@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
     android:background="#ffffff"
@@ -30,20 +30,8 @@
             android:drawableLeft="@drawable/username"
             android:ems="10"
             android:hint=":用户名"
-            android:text="leiming"
+            android:text="15516777056"
             android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/password"
-            android:ems="10"
-            android:text="leiming"
-            android:hint=":密码"
-            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/login"

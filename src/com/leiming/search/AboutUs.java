@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
+/**
+ * 关于我们菜单的界面
+ * */
 public class AboutUs extends ActionBarActivity{
 
 	private android.support.v7.app.ActionBar actionbar;

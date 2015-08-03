@@ -1,6 +1,4 @@
-/**
- * 证书显示的adapter
- * */
+
 package com.leiming.adapter;
 
 import com.leiming.search.R;
@@ -15,7 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
+/**
+ * 证书显示的adapter
+ * */
 public class ZhengsGridAdapter extends BaseAdapter{
 
 	Context context;

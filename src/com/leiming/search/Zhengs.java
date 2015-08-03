@@ -1,6 +1,4 @@
-/**
- * 显示证书的界面
- * */
+
 package com.leiming.search;
 
 import java.util.ArrayList;
@@ -28,7 +26,9 @@ import com.leiming.adapter.ViewPagerAdapter;
 import com.leiming.adapter.ZhengsGridAdapter;
 import com.leiming.utils.Container;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
+/**
+ * 显示证书的界面
+ * */
 public class Zhengs extends ActionBarActivity implements OnItemClickListener{
 
 	GridView gridview;
