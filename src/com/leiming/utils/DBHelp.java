@@ -143,13 +143,21 @@ public class DBHelp {
 	}
 	//根据条件继续查询对应集合中是否有对应的数据
 	public static List<Title> sreachHelper(String condition, List<Title> data) {
+		//获取所有要查询的条件
+		String conditions[] = condition.split("，"); 
 		List<Title> copy = new ArrayList<Title>();
 		for (Title title : data) {
-			if (title.getTitle() != null && title.getTitle().contains(condition)) {
-				copy.add(title);
-			} else if (title.getContent() != null && title.getContent().contains(condition)) {
-				copy.add(title);
+			//将所有的题目数据和每个条件进行比对
+			for(String cod : conditions){
+				//如果标题或者是内容中有匹配的内容则添加进入data中
+				if ( (title.getTitle() != null && title.getTitle().contains(cod)) || 
+						(title.getContent() != null && title.getContent().contains(cod))
+						) {
+					copy.add(title);
+					break;
+				} 
 			}
+			
 		}
 		return copy;
 	}

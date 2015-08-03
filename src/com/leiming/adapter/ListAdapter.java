@@ -70,13 +70,18 @@ public class ListAdapter extends BaseAdapter {
 		}
 		String title = data.get(postions).getTitle();
 		String content = data.get(postions).getContent();
+		//所有的查询条件
+		String sreachSplit[] = sreach.split("，");
 		//根据查询的数据设置显示条目的样式
 		if (title != null) {
 			SpannableString msp = new SpannableString(title);
-			int start = title.indexOf(sreach);
-			if (start != -1) {
-				// 设置背景色为青色
-				msp.setSpan(new BackgroundColorSpan(Color.RED), start, start + sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
+			//获取所有的条件，对每个条件对应的在title标题首次出现的位置进行设置显示样式
+			for(String sreachs : sreachSplit){
+				int start = title.indexOf(sreachs);
+				if (start != -1) {
+					// 设置背景色为青色
+					msp.setSpan(new BackgroundColorSpan(Color.RED), start, start + sreachs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
+				}
 			}
 			holder.tv_title.setText(msp);
 		} else {
@@ -85,11 +90,15 @@ public class ListAdapter extends BaseAdapter {
 		
 		if (content != null) {
 			SpannableString msp = new SpannableString(content);
-			int start = content.indexOf(sreach);
-			if (start != -1) {
-				// 设置背景色为青色
-				msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+ sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
+			//获取所有的条件，对每个条件对应的在content内容首次出现的位置进行设置显示样式
+			for(String sreachs : sreachSplit){
+				int start = content.indexOf(sreachs);
+				if (start != -1) {
+					// 设置背景色为青色
+					msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+ sreachs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
+				}
 			}
+			
 			holder.tv_context.setText(msp);
 		} else {
 			holder.tv_context.setText("");

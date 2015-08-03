@@ -25,6 +25,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.leiming.adapter.ListAdapter;
 import com.leiming.bean.Title;
+import com.leiming.utils.AppUtil;
 import com.leiming.utils.Container;
 import com.leiming.utils.DBHelp;
 
@@ -112,11 +113,15 @@ public class TitlesActivity extends ActionBarActivity {
 				int count) {
 			//Log.d("TAG", "onTextChanged--------------->");
 			String change = s.toString();
-		    //设置字体背景色 
-			data.clear();
-			if(change.length()>0){
+			
+			//如果是，号的是要是进行多项查询的，所以，号就不用执行查询的操作
+			//AppUtil.logInfo("change", change.substring(change.length()-1) );
+			if( change.length()>0 && !(change.substring(change.length()-1).equals("，")) ){
+				data.clear();
+				 //设置字体背景色 
 				data.addAll(DBHelp.sreachHelper(change, data_temp));
-			}else {
+			}else if( change.length()<= 0 ){
+				data.clear();
 				data.addAll(data_temp);
 			}
 			adapter.setSreach(change);
