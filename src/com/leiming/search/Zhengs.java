@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
@@ -56,8 +57,10 @@ public class Zhengs extends ActionBarActivity implements OnItemClickListener{
 	@SuppressLint("ResourceAsColor")
 	private void initActionbar(){
 		actionbar = getSupportActionBar();
-		actionbar.setHomeButtonEnabled(true);
-		actionbar.setIcon(R.drawable.back);
+		actionbar.setDisplayHomeAsUpEnabled(true);  
+		//actionbar.setHomeButtonEnabled(true);
+		//actionbar.setIcon(R.drawable.back);
+		actionbar.setDisplayHomeAsUpEnabled(true);  
 		actionbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.top));
 		int titleId = Resources.getSystem().getIdentifier("action_bar_title","id", "android");
 		TextView yourTextView = (TextView) findViewById(titleId);
@@ -107,4 +110,14 @@ public class Zhengs extends ActionBarActivity implements OnItemClickListener{
 		imageLoader.displayImage(url, image, Container.adUrl);
 		return view;
 	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+		     case android.R.id.home:  
+		         finish();  
+		         return true;  
+	     }
+		return false;  
+	} 
+	
 }

@@ -62,8 +62,9 @@ public class TitlesActivity extends ActionBarActivity {
 	@SuppressLint("ResourceAsColor")
 	private void initActionbar(){
 		actionbar = getSupportActionBar();
-		actionbar.setHomeButtonEnabled(true);
-		actionbar.setIcon(R.drawable.back);
+		//actionbar.setHomeButtonEnabled(true);
+		//actionbar.setIcon(R.drawable.back);
+		actionbar.setDisplayHomeAsUpEnabled(true);  
 		actionbar.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.top));
 		int titleId = Resources.getSystem().getIdentifier("action_bar_title",

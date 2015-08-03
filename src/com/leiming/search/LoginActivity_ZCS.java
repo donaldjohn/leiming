@@ -79,10 +79,10 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
     }
 	
 	//打开进度条
-    private void startProgressDialog(){
+    private void startProgressDialog(String msg){
         if (progressDialog == null){
             progressDialog = CustomProgressDialog.createDialog(this);
-            progressDialog.setMessage("登录中...");
+            progressDialog.setMessage(msg);
         }
         progressDialog.show();
     }
@@ -158,7 +158,7 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 		//任务启动是打开进度条
 		@Override
         protected void onPreExecute(){
-            startProgressDialog(); //打开进度条
+        	  startProgressDialog("加载中..."); //打开进度条
         }
 		//任务结束是关闭进度条
 		//相当于使用handler,对相应的iamgeView对象指定数据流

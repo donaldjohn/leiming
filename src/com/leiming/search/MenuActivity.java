@@ -30,6 +30,7 @@ public class MenuActivity extends ActionBarActivity {
 	String[] data;
 	private ActionBar actionbar;
 	GridAdapter adapter;
+	private String tag; //当前界面要显示什么内容的标识
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class MenuActivity extends ActionBarActivity {
 	private void initData() {
 		gridview = (GridView) findViewById(R.id.gridView1);
 		Intent intent = getIntent();
-		String tag = intent.getStringExtra("tag");
+		tag = intent.getStringExtra("tag");
 		if (tag == null) {
 			data = new String[] { "关于我们", "计算机二级", "会计证", "统考类", "教师资格证",
 					"证书展示" };
@@ -60,7 +61,10 @@ public class MenuActivity extends ActionBarActivity {
 	@SuppressLint("ResourceAsColor")
 	private void initActionbar() {
 		actionbar = getSupportActionBar();
-		actionbar.setHomeButtonEnabled(true);
+		if( tag!=null ){
+			actionbar.setDisplayHomeAsUpEnabled(true);  
+		}
+		//actionbar.setHomeButtonEnabled(true);
 		//actionbar.setIcon(R.drawable.back);
 		actionbar.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.top));
