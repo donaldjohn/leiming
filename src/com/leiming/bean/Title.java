@@ -8,23 +8,11 @@ import java.io.Serializable;
  * */
 public class Title implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private  String title;
-	private String content;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
 	
+	public int _id; //本地数据存储的id值
+	public int serverId; //服务器上面的数据的id值
+	public  String title; //题目的标题
+	public String content; //题目的内容也就是答案
+	public String type; //题目的类型
+
 }

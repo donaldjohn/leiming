@@ -45,15 +45,20 @@ public class DetailActivity extends ActionBarActivity{
 			Title title =(Title) intent.getSerializableExtra("title");
 			String sreach =intent.getStringExtra("sreach");
 			tv_sreach.setText(sreach!=null?sreach:"");
+			//所有的查询条件
+			String sreachSplit[] = sreach.split("，");
 			if(title!=null){
-				String t =title.getTitle();
-				String content =title.getContent();
+				String t =title.title;
+				String content =title.content;
 				if(t!=null){
 					SpannableString msp = new SpannableString(t);
 					//判断当前的数据中是否有查询的数据字段，如果有更改样式
-					int start=t.indexOf(sreach);
-					if(start !=-1){
-						msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  //设置背景色为青色 
+					for(String sreachs : sreachSplit){
+						int start = t.indexOf(sreachs);
+						if (start != -1) {
+							// 设置背景色为青色
+							msp.setSpan(new BackgroundColorSpan(Color.RED), start, start + sreachs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
+						}
 					}
 					tv_title.setText(msp);
 				}else {
@@ -61,10 +66,14 @@ public class DetailActivity extends ActionBarActivity{
 				}
 				if(content!=null){
 					SpannableString msp = new SpannableString(content);
-					int start=content.indexOf(sreach);
-					if(start!=-1){
-						msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+sreach.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  //设置背景色为青色 
+					//判断当前的数据中是否有查询的数据字段，如果有更改样式
+					for(String sreachs : sreachSplit){
+						int start=content.indexOf(sreachs);
+						if(start!=-1){
+							msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+sreachs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  //设置背景色为青色 
+						}
 					}
+					
 					tv_content.setText(msp);
 				}else {
 					tv_content.setText("");

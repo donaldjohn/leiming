@@ -15,6 +15,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.TextUtils;
 
 import com.leiming.bean.Title;
 import com.leiming.utils.Container.unit;
@@ -58,9 +59,9 @@ public class DBHelp {
 				i++;
 				String[] split = result.split("&&");
 				Title title = new Title();
-				title.setTitle(split[0]);
+				title.title = split[0];
 				if (split.length > 1) {
-					title.setContent(split[1]);
+					title.content = split[1];
 				}
 				list.add(title);
 			}
@@ -141,24 +142,58 @@ public class DBHelp {
 		}
 		return sdcard_path;
 	}
-	//根据条件继续查询对应集合中是否有对应的数据
+	//根据条件继续查询对应集合中是否有对应的数据，返回的是符合查询条件的数据
 	public static List<Title> sreachHelper(String condition, List<Title> data) {
 		//获取所有要查询的条件
 		String conditions[] = condition.split("，"); 
-		List<Title> copy = new ArrayList<Title>();
+		List<Title> queryLsit = new ArrayList<Title>();
+		HashMap<String,String> namePinMap = null;
+		String spellString = null;
 		for (Title title : data) {
-			//将所有的题目数据和每个条件进行比对
+			
+			/*
+			 *将所有的题目数据和每个条件进行比对 
+			 * 先进行比对标题和答案中是否有当前的数据，如果没有那么再进行比对拼音是否包含
+			 * */
 			for(String cod : conditions){
 				//如果标题或者是内容中有匹配的内容则添加进入data中
-				if ( (title.getTitle() != null && title.getTitle().contains(cod)) || 
-						(title.getContent() != null && title.getContent().contains(cod))
+				if ( (title.title != null && title.title.contains(cod)) || 
+						(title.content != null && title.content.contains(cod))
 						) {
-					copy.add(title);
+					queryLsit.add(title);
 					break;
 				} 
+				//如果当前的查询条件是拼音那么就将title中的内容转为拼音再进行匹配
+				//先判断title标题是否数据
+				//判断条件是否为汉字字符  
+                if ( !cod.matches("[\\u4E00-\\u9FA5]+")
+                		) {
+                	if(!TextUtils.isEmpty(title.title)){
+                		//如果不是汉字，那么将当前的标题转为拼音再进行比较
+                    	//判断当前的标题中是否包含查询条件
+                    	namePinMap = AppUtil.getPingYin(title.title);
+                    	//获取标题转化以后的所有的拼音,然后判断是否包含查询条件
+                    	spellString = namePinMap.get("spellString");
+                		if( spellString.contains(cod) ){
+                			queryLsit.add(title);
+        					break;
+                		}
+                	}
+                	if( !TextUtils.isEmpty(title.content) ){
+                		//如果不是汉字，那么将当前的标题转为拼音再进行比较
+                    	namePinMap = AppUtil.getPingYin(title.content);
+                    	spellString = namePinMap.get("spellString");
+                    	//判断当前的标题中是否包含查询条件
+                    	if( spellString.contains(cod) ){ //如果包含，则添加进queryLsit
+                    		queryLsit.add(title);
+        					break;
+                    	}
+                	}
+                }
+                
 			}
 			
 		}
-		return copy;
+		return queryLsit;
 	}
 }
