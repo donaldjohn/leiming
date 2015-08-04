@@ -1,12 +1,9 @@
 package com.leiming.db;
 
-import com.leiming.bean.Title;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
-import android.util.Log;
 
 /**
  * 用于创建当前app项目的本地sqllit数据库

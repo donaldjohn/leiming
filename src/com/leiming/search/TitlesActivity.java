@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -11,8 +12,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,12 +22,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.leiming.adapter.ListAdapter;
+import com.leiming.asynctask.BaseAsyncTask;
 import com.leiming.bean.Title;
+import com.leiming.control.LoadTitlesDataControl;
+import com.leiming.db.TitleDBM;
 import com.leiming.utils.AppUtil;
 import com.leiming.utils.Container;
+import com.leiming.utils.Container.unit;
 import com.leiming.utils.DBHelp;
 
 /**
@@ -36,7 +44,8 @@ import com.leiming.utils.DBHelp;
 public class TitlesActivity extends ActionBarActivity {
 
 	ListAdapter adapter = null;
-	ListView lv; //显示搜索结果
+	private PullToRefreshListView queryListView;  //显示搜索结果
+	//ListView lv; //显示搜索结果
 	List<Title> data; //试题的数据集合
 	List<Title> data_temp; //临时保存实体的数据集合
 	EditText et;
@@ -55,10 +64,10 @@ public class TitlesActivity extends ActionBarActivity {
 
 	private void initView() {
 		empty = (LinearLayout) findViewById(R.id.empty_view);
-		lv = (ListView) findViewById(R.id.search_result);
+		queryListView = (PullToRefreshListView) findViewById(R.id.search_result);
 		et = (EditText) findViewById(R.id.search);
 		//对listView设置一个空数据的时候显示的界面
-		lv.setEmptyView(empty);
+		queryListView.setEmptyView(empty);
 	}
 
 	@SuppressLint("ResourceAsColor")
@@ -78,7 +87,7 @@ public class TitlesActivity extends ActionBarActivity {
 
 	private void initEvent(){
 		//设置具体的条目点击事件
-		lv.setOnItemClickListener(new OnItemClickListener() {
+		queryListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -91,19 +100,65 @@ public class TitlesActivity extends ActionBarActivity {
 				startActivity(intent);
 			}
 		});
+		ILoadingLayout startLabels = queryListView.getLoadingLayoutProxy(true, false);  
+        startLabels.setPullLabel("下拉获取最新数据...");// 刚下拉时，显示的提示  
+        startLabels.setRefreshingLabel("好嘞，正在刷新...");// 刷新时  
+        startLabels.setReleaseLabel("会消耗流量哦...");// 下来达到一定距离时，显示的提示 
+        //上拉监听函数  
+        queryListView.setOnRefreshListener(new OnRefreshListener<ListView>() {  
+            @Override  
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {  
+            	//queryListView.getLoadingLayoutProxy().setPullLabel("下拉可刷新!");  
+                //执行刷新函数  
+            	Log.i("mPullRefreshScrollView", "onRefresh");
+            	//重新从服务器获取最新的数据
+                new GetDataTask(getApplicationContext()).execute();  
+            }  
+        }); 
 		et.addTextChangedListener(textWatcher);
 	}
+	/**
+	 * 用于从服务器上面获取当前类型的所有的题目数据
+	 * */
+	private class GetDataTask extends BaseAsyncTask  
+    {  
+		
+		public GetDataTask(Context context) {
+    		super(context);
+    	}
+        @Override
+		protected String doInBackground(String... params) {
+        	//重新从服务器获取当前类型的数据
+        	unit typeUnit = Container.current_unit;
+        	//获取当前的类型
+        	String type = typeUnit.getValue();
+        	return LoadTitlesDataControl.loadDataForType(type,getApplicationContext());
+		}  
+        
+        @Override  
+        protected void onPostExecute(String result)  
+        {  
+        	//从本地的题目数据表中重新获取数据，然后重新对apdate的data赋值
+        	TitleDBM tdbm = new TitleDBM(getApplicationContext());
+        	//获取对应类型的所有的题目数据
+        	tdbm.getAllTitlesForType(Container.current_unit.getValue());
+        	data.addAll(null);
+        	adapter.notifyDataSetChanged();  
+        	queryListView.onRefreshComplete();  
+        }
+
+    }  
+	
+	
 	//edtiTexit输入改变事件监听
 	private TextWatcher textWatcher = new TextWatcher() {
 		@Override
 		public void afterTextChanged(Editable s) {
-			//Log.d("TAG", "afterTextChanged--------------->");
 		}
 
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
 				int after) {
-			//Log.d("TAG", "beforeTextChanged--------------->");
 		}
 		/*
 		 * 当输入内容变化的时候进行更新listView中的数据已达到搜索的目的
@@ -112,7 +167,6 @@ public class TitlesActivity extends ActionBarActivity {
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
-			//Log.d("TAG", "onTextChanged--------------->");
 			String change = s.toString();
 			
 			//如果是，号的是要是进行多项查询的，所以，号就不用执行查询的操作
@@ -143,11 +197,12 @@ public class TitlesActivity extends ActionBarActivity {
 	}
 
 	private void initData() {
+		//根据获取当前类型对应的数据
 		data_temp =DBHelp.searchFromSD(Container.current_unit,this);
 		data = new ArrayList<Title>();
 		data.addAll(data_temp);
 		adapter = new ListAdapter(getApplicationContext(), data);
-		lv.setAdapter(adapter);
+		queryListView.setAdapter(adapter);
 	}
 
 }

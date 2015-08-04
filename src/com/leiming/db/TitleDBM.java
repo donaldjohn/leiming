@@ -26,7 +26,6 @@ public class TitleDBM {
       
     /** 
      * add Title 
-     * @param userinfo 
      */  
     public void add(List<Title> userinfos) {  
         db.beginTransaction();  //开始事务  
@@ -104,5 +103,19 @@ public class TitleDBM {
      */  
     public void closeDB() {  
         db.close();  
-    }  
+    }
+    //根据类型进行获取对应的所有的题目的数据信息
+	public void getAllTitlesForType(String type) {
+		ArrayList<Title> titles = new ArrayList<Title>();  
+        Cursor c = queryTheCursor();  
+        while (c.moveToNext()) {  
+        	Title title = new Title();  
+        	title._id = c.getInt(c.getColumnIndex("_id"));  
+        	title.title = c.getString(c.getColumnIndex("title"));  
+        	title.content = c.getString(c.getColumnIndex("content"));  
+        	titles.add(title);  
+        }  
+        c.close();  
+        return titles;  
+	}  
 }

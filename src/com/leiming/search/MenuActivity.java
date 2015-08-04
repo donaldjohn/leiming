@@ -92,6 +92,8 @@ public class MenuActivity extends ActionBarActivity {
 						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 					} else {
 						intent.setClass(MenuActivity.this, TitlesActivity.class);
+						//设置intent要获取数据的类型
+						//intent.putExtra("type", "teacher");
 						Container.current_unit = unit.TEACHER;
 						startActivity(intent);
 					}
@@ -102,6 +104,7 @@ public class MenuActivity extends ActionBarActivity {
 						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 					} else {
 						intent.setClass(MenuActivity.this, TitlesActivity.class);
+						//intent.putExtra("type", "computer");
 						Container.current_unit = unit.COMPUTER;
 						startActivity(intent);
 					}
@@ -112,6 +115,7 @@ public class MenuActivity extends ActionBarActivity {
 						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
 					} else {
 						intent.setClass(MenuActivity.this, TitlesActivity.class);
+						//intent.putExtra("type", "accounting");
 						Container.current_unit = unit.ACCOUNTING;
 						startActivity(intent);
 					}
@@ -124,6 +128,7 @@ public class MenuActivity extends ActionBarActivity {
 						intent.setClass(MenuActivity.this, MenuActivity.class);
 						//设置一个标示，说明当前要显示的是统考类的功能界面
 						intent.putExtra("tag", "EXMA");
+						//intent.putExtra("type", "exam");
 						Container.current_unit = unit.EXAM;
 						startActivity(intent);
 					}

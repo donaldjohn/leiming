@@ -20,6 +20,7 @@ public class Container {
 	public static String[] pwd;
 	public static String[] limit;
 	public static int current_user;
+	//保存当前点击的是那个类型
 	public static unit current_unit;
 
 	/**  

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
-
+	<!-- 显示当前类型下的题目数据的界面 -->
     <EditText
         android:id="@+id/search"
         android:layout_width="match_parent"
@@ -20,14 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-
-        <ListView
+		<!-- 使用带下拉刷新功能的listview -->
+        <com.handmark.pulltorefresh.library.PullToRefreshListView  
             android:id="@+id/search_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" >
-        </ListView>
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>>
 		<!-- 当listView没有数据的时候显示 -->
         <LinearLayout
             android:id="@+id/empty_view"
@@ -46,8 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="没有找到数据"
-                android:textSize="10pt" />
+                android:text="没有找到数据，尝试下拉刷新一下吧"
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 

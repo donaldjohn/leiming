@@ -2,13 +2,6 @@ package com.leiming.utils;
 
 import java.util.HashMap;
 
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
 import com.leiming.bean.Constants;
 
 import android.app.Activity;
@@ -137,7 +130,7 @@ public class AppUtil extends Activity{
     } 
     
     //将汉字转为对应的拼音，返回一个拼音的map集合（拼音，汉字所在的index）
-    public static HashMap<String,String> getPingYin(String src) {  
+    /*public static HashMap<String,String> getPingYin(String src) {  
   	  
         char[] srcArray = null;  
         //获取字符串转为数组的变量
@@ -176,7 +169,7 @@ public class AppUtil extends Activity{
             e1.printStackTrace();  
         }  
         return spellMap;  
-    } 
+    } */
 	
 	
 }
