@@ -57,6 +57,7 @@ public class TitlesActivity extends ActionBarActivity {
 		empty = (LinearLayout) findViewById(R.id.empty_view);
 		lv = (ListView) findViewById(R.id.search_result);
 		et = (EditText) findViewById(R.id.search);
+		//对listView设置一个空数据的时候显示的界面
 		lv.setEmptyView(empty);
 	}
 

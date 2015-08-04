@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.R.bool;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -147,22 +148,27 @@ public class DBHelp {
 		//获取所有要查询的条件
 		String conditions[] = condition.split("，"); 
 		List<Title> queryLsit = new ArrayList<Title>();
-		HashMap<String,String> namePinMap = null;
-		String spellString = null;
+		boolean stateYesNo;
 		for (Title title : data) {
-			
+			stateYesNo = true;
 			/*
 			 *将所有的题目数据和每个条件进行比对 
 			 * 先进行比对标题和答案中是否有当前的数据，如果没有那么再进行比对拼音是否包含
+			 * 只有所有的条件都满足的时候才会进行显示
 			 * */
 			for(String cod : conditions){
 				//如果标题或者是内容中有匹配的内容则添加进入data中
-				if ( (title.title != null && title.title.contains(cod)) || 
-						(title.content != null && title.content.contains(cod))
+				if ( !( (title.title != null && title.title.contains(cod)) || 
+						(title.content != null && title.content.contains(cod)) )
 						) {
-					queryLsit.add(title);
+					//如果条件，标题和答案都不满足就设置false，同时break
+					stateYesNo =false;
 					break;
 				} 
+			}
+			if(stateYesNo){
+				//说明该题目所有的条件都满足，那么就要进行显示
+				queryLsit.add(title);
 			}
 			
 		}

@@ -87,25 +87,7 @@ public class ListAdapter extends BaseAdapter {
 					if (start != -1) {
 						// 设置背景色为青色
 						msp.setSpan(new BackgroundColorSpan(Color.RED), start, start + sreachs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
-						//break; //如果这里进行了设置，说明有汉字的查询符合要求了，那么就不用再判断下面的拼音是否满足了，直接跳出
 					}
-					//判断当前输入的是不是拼音
-					if ( !sreachs.matches("[\\u4E00-\\u9FA5]+")  ){
-						namePinMap = AppUtil.getPingYin(title);
-						//判断如果将标题转为拼音，条件是否在标题的拼音中存在
-						String spellString = namePinMap.get("spellString");
-						if( spellString.contains(sreachs) ){
-							//如果有对应的数据，则获取对应拼音再汉子中的位置，然后显示
-							String mys[] = sreachs.split(" ");
-							int index = 0;
-							for(String myValue : mys){
-								//获取对应的拼音再文本中对应的index
-								index = Integer.parseInt(namePinMap.get(myValue));
-								msp.setSpan(new BackgroundColorSpan(Color.RED), index, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
-							}
-						}
-					}
-					
 				}
 			}
 			
@@ -123,24 +105,7 @@ public class ListAdapter extends BaseAdapter {
 					if (start != -1) {
 						// 设置背景色为青色
 						msp.setSpan(new BackgroundColorSpan(Color.RED), start, start+ sreachs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
-						//break;
 					}
-					if ( !sreachs.matches("[\\u4E00-\\u9FA5]+")  ){
-						namePinMap = AppUtil.getPingYin(content);
-						//判断如果将标题转为拼音，条件是否在答案的拼音中存在
-						String spellString = namePinMap.get("spellString");
-						if( spellString.contains(sreachs) ){
-							//如果有对应的数据，则获取对应拼音再汉子中的位置，然后显示
-							String mys[] = sreachs.split(" ");
-							int index = 0;
-							for(String myValue : mys){
-								//获取对应的拼音再文本中对应的index
-								index = Integer.parseInt(namePinMap.get(myValue));
-								msp.setSpan(new BackgroundColorSpan(Color.RED), index, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
-							}
-						}
-					}
-					
 				}
 			}
 			
