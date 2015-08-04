@@ -163,34 +163,6 @@ public class DBHelp {
 					queryLsit.add(title);
 					break;
 				} 
-				//如果当前的查询条件是拼音那么就将title中的内容转为拼音再进行匹配
-				//先判断title标题是否数据
-				//判断条件是否为汉字字符  
-                if ( !cod.matches("[\\u4E00-\\u9FA5]+")
-                		) {
-                	if(!TextUtils.isEmpty(title.title)){
-                		//如果不是汉字，那么将当前的标题转为拼音再进行比较
-                    	//判断当前的标题中是否包含查询条件
-                    	namePinMap = AppUtil.getPingYin(title.title);
-                    	//获取标题转化以后的所有的拼音,然后判断是否包含查询条件
-                    	spellString = namePinMap.get("spellString");
-                		if( spellString.contains(cod) ){
-                			queryLsit.add(title);
-        					break;
-                		}
-                	}
-                	if( !TextUtils.isEmpty(title.content) ){
-                		//如果不是汉字，那么将当前的标题转为拼音再进行比较
-                    	namePinMap = AppUtil.getPingYin(title.content);
-                    	spellString = namePinMap.get("spellString");
-                    	//判断当前的标题中是否包含查询条件
-                    	if( spellString.contains(cod) ){ //如果包含，则添加进queryLsit
-                    		queryLsit.add(title);
-        					break;
-                    	}
-                	}
-                }
-                
 			}
 			
 		}
