@@ -67,7 +67,7 @@ public class HttpUtil {
 	//服务器的地址
 	public static final String BASE_URL = "http://123.57.81.43:8090/leimingService";
 	//公司的地址
-	
+	//public static final String BASE_URL = "http://192.168.15.117:8090/leimingService";
 	//设置httpClient的参数
 	public static void setHtppClientParmas(){
 		//设置httpClient的请求超时

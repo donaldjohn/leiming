@@ -99,7 +99,7 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.login: //登录
+		case R.id.login: //登录/注册
 			String usernameValue = username.getText().toString();
 			String mac = AppUtil.getLocalMacAddress(getApplicationContext());
 			if( !TextUtils.isEmpty(usernameValue) ){
@@ -119,7 +119,20 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 			break;
 		case R.id.register: //注册
 			//修改登录按钮的显示文本为注册，点击的时候判断文本是登录还是注册
-			login.setText("注册");
+			if( "我要注册".equals(register.getText()) ){
+				//如果当前是我要注册，那么用户再次点击的时候就应该变为我要登录，同时loin上的文本也要变为登录
+				login.setText("注册");
+				//login.setTextSize(AppUtil.px2sp(getApplicationContext(), 14));
+				login.setTextSize(17);
+				register.setText("我要登陆");
+			}else{
+				//变register为我要登录,login上的文本变为注册,同时调整大小16sp
+				login.setText("登陆");
+				//login.setTextSize(AppUtil.px2sp(getApplicationContext(), 16));
+				login.setTextSize(14);
+				register.setText("我要注册");
+			}
+			
 			break;
 
 		default:
