@@ -24,98 +24,102 @@ public class TitleDBM {
         db = helper.getWritableDatabase();  
     }  
       
-    /** 
-     * add Title 
-     */  
-    public void add(List<Title> userinfos) {  
+    public void add(List<Title> titleValues) {  
         db.beginTransaction();  //开始事务  
         try {  
-            for (Title userinfo : userinfos) {  
-                db.execSQL("insert into Title values(null, ?, ?)", new Object[]{userinfo.title,userinfo.content});  
+            for (Title titleValue : titleValues) {  
+                db.execSQL("insert into title(null, ?,?,?,?,?)", 
+            		new Object[]{titleValue.serverId,titleValue.title,titleValue.type,titleValue.operateTime});  
             }  
             db.setTransactionSuccessful();  //设置事务成功完成  
         } finally {  
             db.endTransaction();    //结束事务  
         }  
     }  
-      
-    /** 
-     * update Title
-     * @param userinfo 
-     */  
-    public void updateAge(Title userinfo) {  
-    	db.execSQL("update Title set user_head=? where user_num = ?",new Object[]{userinfo.title,userinfo.content});
+    
+    public void add(Title titleValue) {  
+		db.execSQL("insert into title(null, ?,?,?,?,?)", 
+				new Object[]{titleValue.serverId,titleValue.title,titleValue.type,titleValue.operateTime});  
     }  
       
-    /** 
-     * delete old Title 
-     * @param userinfo 
-     */  
-    public void deleteOldPerson(Title userinfo) {  
-        db.execSQL("delete from Title where user_num = ?", new Object[]{userinfo.title});  
+    public void update(Title titleValue) {  
+    	//servierId,title,content,type,operateTime
+    	db.execSQL("update title set servierId=?,title=?,content=?,type=?,operateTime=? where _id = ?",
+		new Object[]{titleValue.serverId,titleValue.title,titleValue.content,titleValue.type,titleValue.operateTime,titleValue._id});
     }  
+    //根据title删除
+    public void delete(Title titleValue) {  
+        db.execSQL("delete from title where _id = ?", new Object[]{titleValue._id});  
+    }  
+    //根据对应的类型将数据全部删除
+    public void delete(String type){
+    	db.execSQL("delete from title where type = ?", new Object[]{type}); 
+    }
       
     /** 
-     * query all Title, return list 
+     * 获取所有的题目数据
      * @return List<Title> 
      */  
     public List<Title> query() {  
-        ArrayList<Title> userinfos = new ArrayList<Title>();  
-        Cursor c = queryTheCursor();  
+        ArrayList<Title> titleValues = new ArrayList<Title>();  
+        Cursor c = db.rawQuery("select * from title", null);   
         while (c.moveToNext()) {  
-        	Title userinfo = new Title();  
-        	userinfo._id = c.getInt(c.getColumnIndex("_id"));  
-        	userinfo.title = c.getString(c.getColumnIndex("title"));  
-        	userinfo.content = c.getString(c.getColumnIndex("content"));  
-        	userinfos.add(userinfo);  
+        	Title titleValue = new Title();  
+        	titleValue._id = c.getInt(c.getColumnIndex("_id"));  
+        	titleValue.serverId = c.getInt(c.getColumnIndex("servierId"));  
+        	titleValue.title = c.getString(c.getColumnIndex("title"));  
+        	titleValue.content = c.getString(c.getColumnIndex("content"));  
+        	titleValue.type = c.getString(c.getColumnIndex("type"));  
+        	titleValue.operateTime = c.getString(c.getColumnIndex("operateTime"));  
+        	titleValues.add(titleValue);  
         }  
         c.close();  
-        return userinfos;  
+        return titleValues;  
     }  
-      
-    /**
-     * 根据学号/工号获取用户数据
-     * */
-    public Title getInfoByUserNum(String user_num){
-    	Cursor c = db.rawQuery("select * from Title where user_num = ? ", new String[]{user_num});  
-    	Title lu = new Title();
-    	if(c.getCount() > 0){
-    		//要先将Cursor移动到第一个才能进行获取数据
-    		c.moveToFirst(); 
-    		lu.title = c.getString(c.getColumnIndex("title")); 
-        	lu.content = c.getString(c.getColumnIndex("content")); 
-    	}
-    	return lu;
-    }
     
-    /** 
-     * query all Title, return cursor 
-     * @return  Cursor 
-     */  
-    public Cursor queryTheCursor() {  
-    	//使用SQLiteDatabase执行查询语句
-        Cursor c = db.rawQuery("select * from Title", null);  
-        return c;  
-    }  
-      
-    /** 
-     * close database 
-     */  
-    public void closeDB() {  
-        db.close();  
-    }
-    //根据类型进行获取对应的所有的题目的数据信息
-	public void getAllTitlesForType(String type) {
+    /**
+     * 根据类型进行获取对应的所有的题目的数据信息
+     * */
+	public ArrayList<Title> getAllTitlesForType(String type) {
 		ArrayList<Title> titles = new ArrayList<Title>();  
-        Cursor c = queryTheCursor();  
+		Cursor c = db.rawQuery("select * from title where type = ?",new String[]{type});   
         while (c.moveToNext()) {  
         	Title title = new Title();  
         	title._id = c.getInt(c.getColumnIndex("_id"));  
+        	title.serverId = c.getInt(c.getColumnIndex("servierId"));  
         	title.title = c.getString(c.getColumnIndex("title"));  
         	title.content = c.getString(c.getColumnIndex("content"));  
+        	title.type = c.getString(c.getColumnIndex("type"));  
+        	title.operateTime = c.getString(c.getColumnIndex("operateTime"));  
         	titles.add(title);  
         }  
         c.close();  
         return titles;  
 	}  
+      
+    /**
+     * 根据_id进行查询对应的数据
+     * */
+    public Title getInfoById(String _id){
+    	Cursor c = db.rawQuery("select * from title where _id = ? ", new String[]{_id});  
+    	Title title = new Title();
+    	if(c.getCount() > 0){
+    		//要先将Cursor移动到第一个才能进行获取数据
+    		c.moveToFirst(); 
+    		title._id = c.getInt(c.getColumnIndex("_id"));  
+        	title.serverId = c.getInt(c.getColumnIndex("servierId"));  
+        	title.title = c.getString(c.getColumnIndex("title"));  
+        	title.content = c.getString(c.getColumnIndex("content"));  
+        	title.type = c.getString(c.getColumnIndex("type"));  
+        	title.operateTime = c.getString(c.getColumnIndex("operateTime"));  
+    	}
+    	return title;
+    }
+    
+	/** 
+     * close database 
+     */  
+    public void closeDB() {  
+        db.close();  
+    }
 }

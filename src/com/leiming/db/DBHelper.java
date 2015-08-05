@@ -16,14 +16,16 @@ public class DBHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;  
     //用户信息表
     /**
-     * 用户信息表的数据信息
-     * user_num : 用户学号/工号
-     * user_head: 用户头像数据
+     * 所有题目数据表
+     * servierId : 服务器上面的条目的id
+     * title: 题目的标题
+     * content: 题目的内容（答案）
+     * type: 题目的类型
+     * operateTime: 服务上该题目的操作时间
      * */
-    private String userInfo = "create table if not exists localUserInfo ("
+    private String userInfo = "create table if not exists title ("
     		+ "_id integer primary key autoincrement,"
-    		+ "user_num,"
-    		+ "user_head"
+    		+ "servierId,title,content,type,operateTime"
     		+ ")";
 	
 	public DBHelper(Context context){  

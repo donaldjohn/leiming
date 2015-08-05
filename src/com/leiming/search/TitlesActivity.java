@@ -32,10 +32,8 @@ import com.leiming.asynctask.BaseAsyncTask;
 import com.leiming.bean.Title;
 import com.leiming.control.LoadTitlesDataControl;
 import com.leiming.db.TitleDBM;
-import com.leiming.utils.AppUtil;
 import com.leiming.utils.Container;
 import com.leiming.utils.Container.unit;
-import com.leiming.utils.DBHelp;
 
 /**
  * 各选项功能的数据显示界面
@@ -49,7 +47,12 @@ public class TitlesActivity extends ActionBarActivity {
 	List<Title> data; //试题的数据集合
 	List<Title> data_temp; //临时保存实体的数据集合
 	EditText et;
-	LinearLayout empty;
+	LinearLayout empty; //当listView数据为空时显示的view
+	/*
+	 * empyt里面的textView显示的文本信息，在本地没有数据的显示:没有找到数据，尝试下拉刷新一下吧
+	 * 如果是没有查找到数据那么就显示：没有对应的数据
+	 * */
+	TextView emptyViewText; 
 	private ActionBar actionbar;
 
 	@Override
@@ -64,6 +67,7 @@ public class TitlesActivity extends ActionBarActivity {
 
 	private void initView() {
 		empty = (LinearLayout) findViewById(R.id.empty_view);
+		emptyViewText = (TextView) findViewById(R.id.emptyText);
 		queryListView = (PullToRefreshListView) findViewById(R.id.search_result);
 		et = (EditText) findViewById(R.id.search);
 		//对listView设置一个空数据的时候显示的界面
@@ -91,6 +95,7 @@ public class TitlesActivity extends ActionBarActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				//获取当item对应的数据
 				Title title = data.get(arg2);
 				Intent intent = new Intent();
 				intent.setClass(TitlesActivity.this, DetailActivity.class);
@@ -110,7 +115,6 @@ public class TitlesActivity extends ActionBarActivity {
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {  
             	//queryListView.getLoadingLayoutProxy().setPullLabel("下拉可刷新!");  
                 //执行刷新函数  
-            	Log.i("mPullRefreshScrollView", "onRefresh");
             	//重新从服务器获取最新的数据
                 new GetDataTask(getApplicationContext()).execute();  
             }  
@@ -141,9 +145,13 @@ public class TitlesActivity extends ActionBarActivity {
         	//从本地的题目数据表中重新获取数据，然后重新对apdate的data赋值
         	TitleDBM tdbm = new TitleDBM(getApplicationContext());
         	//获取对应类型的所有的题目数据
-        	tdbm.getAllTitlesForType(Container.current_unit.getValue());
-        	data.addAll(null);
+        	data_temp = tdbm.getAllTitlesForType(Container.current_unit.getValue());
+        	if( !(data_temp == null || data_temp.size() <= 0) ){
+    			emptyViewText.setText("没有对应的数据");
+    		}
+        	data.addAll(data_temp);
         	adapter.notifyDataSetChanged();  
+        	//关闭下拉刷新
         	queryListView.onRefreshComplete();  
         }
 
@@ -174,7 +182,7 @@ public class TitlesActivity extends ActionBarActivity {
 			if( change.length()>0 && !(change.substring(change.length()-1).equals("，")) ){
 				data.clear();
 				 //设置字体背景色 
-				data.addAll(DBHelp.sreachHelper(change, data_temp));
+				data.addAll(LoadTitlesDataControl.getTitlesForCondition(change, data_temp));
 			}else if( change.length()<= 0 ){
 				data.clear();
 				data.addAll(data_temp);
@@ -195,10 +203,15 @@ public class TitlesActivity extends ActionBarActivity {
 		}
 		return true;
 	}
-
+	//初始化数据
 	private void initData() {
 		//根据获取当前类型对应的数据
-		data_temp =DBHelp.searchFromSD(Container.current_unit,this);
+		//data_temp =DBHelp.searchFromSD(Container.current_unit,this);
+		TitleDBM tdbm = new TitleDBM(getApplicationContext());
+		data_temp = tdbm.getAllTitlesForType(Container.current_unit.getValue());
+		if( !(data_temp == null || data_temp.size() <= 0) ){
+			emptyViewText.setText("没有对应的数据");
+		}
 		data = new ArrayList<Title>();
 		data.addAll(data_temp);
 		adapter = new ListAdapter(getApplicationContext(), data);

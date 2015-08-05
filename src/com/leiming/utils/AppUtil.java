@@ -1,6 +1,5 @@
 package com.leiming.utils;
 
-import java.util.HashMap;
 
 import com.leiming.bean.Constants;
 
@@ -11,7 +10,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.util.Log;
-import android.util.TypedValue;
 
 /**
  * 用于获取当前手机的一些信息的工具类

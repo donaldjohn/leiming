@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:id="@+id/emptyText"
                 android:text="没有找到数据，尝试下拉刷新一下吧"
                 android:textSize="15sp" />
         </LinearLayout>

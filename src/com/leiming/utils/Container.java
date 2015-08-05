@@ -1,10 +1,7 @@
-/**
- * 包换一些书
- * */
+
 package com.leiming.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,7 +10,9 @@ import android.content.SharedPreferences.Editor;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-
+/**
+ * app中数据类型的描述类，其中使用了枚举类型设置对应的功能类型
+ * */
 public class Container {
 
 	public static String[] username;
