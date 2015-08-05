@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -142,15 +143,24 @@ public class TitlesActivity extends ActionBarActivity {
         @Override  
         protected void onPostExecute(String result)  
         {  
-        	//从本地的题目数据表中重新获取数据，然后重新对apdate的data赋值
-        	TitleDBM tdbm = new TitleDBM(getApplicationContext());
-        	//获取对应类型的所有的题目数据
-        	data_temp = tdbm.getAllTitlesForType(Container.current_unit.getValue());
-        	if( !(data_temp == null || data_temp.size() <= 0) ){
-    			emptyViewText.setText("没有对应的数据");
-    		}
-        	data.addAll(data_temp);
-        	adapter.notifyDataSetChanged();  
+        	switch (Integer.parseInt(result)) {
+			case 1: //说明获取数据成功了
+				//从本地的题目数据表中重新获取数据，然后重新对apdate的data赋值
+	        	TitleDBM tdbm = new TitleDBM(getApplicationContext());
+	        	//获取对应类型的所有的题目数据
+	        	data_temp = tdbm.getAllTitlesForType(Container.current_unit.getValue());
+	        	if( !(data_temp == null || data_temp.size() <= 0) ){
+	    			emptyViewText.setText("没有对应的数据");
+	    		}
+	        	data.addAll(data_temp);
+	        	adapter.notifyDataSetChanged();  
+				break;
+			case 2:
+				Toast.makeText(getApplicationContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
+			default:
+				break;
+			}
+        	super.onPostExecute(result);
         	//关闭下拉刷新
         	queryListView.onRefreshComplete();  
         }

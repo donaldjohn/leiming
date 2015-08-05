@@ -26,20 +26,22 @@ public abstract class BaseAsyncTask extends AsyncTask<String,Integer,String>{
 		//至于服务器返回数据的判断就交给上层了
 		switch (Integer.parseInt(result)) {
 			case HttpUtil.SERVERTIMEOUT:
-				//请求超时了
 				Toast.makeText(context, "网络连接超时，请联系管理员！",Toast.LENGTH_SHORT).show();
 				break;
 			case HttpUtil.REQUESTTIMEOUT:
-				//请求超时了
 				Toast.makeText(context, "网络请求超时！",Toast.LENGTH_SHORT).show();
 				break;
 			case HttpUtil.NETPARSEERROR:
-				//请求超时了
 				Toast.makeText(context, "网络解析异常！",Toast.LENGTH_SHORT).show();
 				break;
 			case HttpUtil.NONETWORKS:
-				//请求超时了
 				Toast.makeText(context, "网络未连接！",Toast.LENGTH_SHORT).show();
+				break;
+			case 404:
+				Toast.makeText(context, "服务器断开连接！",Toast.LENGTH_SHORT).show();
+				break;
+			case 500:
+				Toast.makeText(context, "ServerNoFoud！",Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;
