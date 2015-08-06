@@ -53,7 +53,7 @@ public class HttpUtil {
 	 * */
 	public static final int NETPARSEERROR = -1004;
 	//连接超时设置时间
-	public static final int TIME_OUT_DELAY = 5000;
+	public static final int TIME_OUT_DELAY = 9000;
 	
 	//获取httpclient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
@@ -102,7 +102,7 @@ public class HttpUtil {
 								sbt.outIs = httpResponse.getEntity().getContent();
 							}else if( type.endsWith(ServerBackInfo.TYPE_STRING) ){ //要请求的是string
 								String result = EntityUtils.toString(httpResponse.getEntity()); //获取服务器返回的字符串
-								result=new String(result.getBytes("ISO-8859-1"),"UTF-8");
+								result=new String(result.getBytes("ISO-8859-1"),"GB2312");
 								sbt.outStringContent = result;
 							}
 						}
@@ -175,7 +175,7 @@ public class HttpUtil {
 								sbt.outIs = httpResponse.getEntity().getContent();
 							}else if( type.endsWith(ServerBackInfo.TYPE_STRING) ){ //要请求的是string
 								String result = EntityUtils.toString(httpResponse.getEntity()); //获取服务器返回的字符串
-								result=new String(result.getBytes("ISO-8859-1"),"UTF-8");
+								result=new String(result.getBytes("ISO-8859-1"),"GB2312");
 								sbt.outStringContent = result;
 							}
 							return sbt;

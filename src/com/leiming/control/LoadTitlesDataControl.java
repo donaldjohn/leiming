@@ -25,36 +25,40 @@ public class LoadTitlesDataControl {
 		userParams.put("type", type);
 		ServerBackInfo sbi = null;
 		try {
-			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/getDataForType", ServerBackInfo.TYPE_STRING, userParams, context);
+			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/title_getList", ServerBackInfo.TYPE_STRING, userParams, context);
 			if(sbi.State.equals("200")){ //如果是服务成功，就解析json将服务器端返回的json中的state返回
 				try {
 					//获取返回的字符串
 					JSONObject ob = new JSONObject(sbi.outStringContent);
 					//将获取对应所有的题目数据
-					String titles = ob.getString("titles");
-					if( !TextUtils.isEmpty(titles) ){
+					String state = ob.getString("state"); //获取服务器返回的状态
+					if(state.equals("1")){ //只有返回数据的时候才会进行存入到本地的数据库中
 						TitleDBM tdbm = new TitleDBM(context);
-						Title title;
-						//如果不为空则将获取的所有的题目数据存放到本地数据库中
-						JSONArray titlesJson = new JSONArray(titles);
-						if(titlesJson.length() > 0){
-							//先将当前数据库中的所有该类型的数据参数
-							tdbm.delete(type);
-							//再根据获取的数据，插入到本地的数据库中
-							for( int i=0 ;i<titlesJson.length();i++ ){
-								JSONObject titleJson =  titlesJson.getJSONObject(i);
-								title = new Title(titleJson.getInt("serverId"),titleJson.getString("title"),
-										titleJson.getString("content"),titleJson.getString("type"),
-										titleJson.getString("operateTime")
-										);
-								//添加到本地数据库中
-								tdbm.add(title);
+						tdbm.delete(type);
+						//获取所有的题目数据
+						String titles = ob.getString("titles");
+						if( !TextUtils.isEmpty(titles) ){
+							
+							Title title;
+							//如果不为空则将获取的所有的题目数据存放到本地数据库中
+							JSONArray titlesJson = new JSONArray(titles);
+							if(titlesJson.length() > 0){
+								//先将当前数据库中的所有该类型的数据参数
+								//再根据获取的数据，插入到本地的数据库中
+								for( int i=0 ;i<titlesJson.length();i++ ){
+									JSONObject titleJson =  titlesJson.getJSONObject(i);
+									title = new Title(titleJson.getInt("id"),titleJson.getString("title"),
+											titleJson.getString("content"),titleJson.getString("type"),
+											titleJson.getString("operateTime")
+											);
+									//添加到本地数据库中
+									tdbm.add(title);
+								}
 							}
 						}
-						
 					}
 					//返回服务器返回的state状态
-					return ob.getString("state");
+					return state;
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

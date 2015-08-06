@@ -97,7 +97,7 @@ public class TitlesActivity extends ActionBarActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				//获取当item对应的数据
-				Title title = data.get(arg2);
+				Title title = data.get(arg2-1);
 				Intent intent = new Intent();
 				intent.setClass(TitlesActivity.this, DetailActivity.class);
 				//将当前点击的数据的实体类传递过去
@@ -152,11 +152,17 @@ public class TitlesActivity extends ActionBarActivity {
 	        	if( !(data_temp == null || data_temp.size() <= 0) ){
 	    			emptyViewText.setText("没有对应的数据");
 	    		}
+	        	data.clear();
 	        	data.addAll(data_temp);
 	        	adapter.notifyDataSetChanged();  
+	        	Toast.makeText(getApplicationContext(), "获取数据成功", Toast.LENGTH_SHORT).show();
 				break;
-			case 2:
-				Toast.makeText(getApplicationContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
+			case 3:
+				Toast.makeText(getApplicationContext(), "没有该类型的数据", Toast.LENGTH_SHORT).show();
+				break;
+			case 4:
+				Toast.makeText(getApplicationContext(), "请求类型不能为空", Toast.LENGTH_SHORT).show();
+				break;
 			default:
 				break;
 			}
