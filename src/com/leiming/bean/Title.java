@@ -25,6 +25,9 @@ public class Title implements Serializable{
 	public Title(int serverId,String title,String content,String type,String operateTime){
 		this.serverId = serverId;
 		this.title = title;
+		this.content = content;
+		this.type = type;
+		this.operateTime = operateTime;
 	}
 
 }

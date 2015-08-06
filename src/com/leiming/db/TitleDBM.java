@@ -28,18 +28,18 @@ public class TitleDBM {
         db.beginTransaction();  //开始事务  
         try {  
             for (Title titleValue : titleValues) {  
-                db.execSQL("insert into title(null, ?,?,?,?,?)", 
-            		new Object[]{titleValue.serverId,titleValue.title,titleValue.type,titleValue.operateTime});  
+                db.execSQL("insert into title(null,?,?,?,?,?)", 
+            		new Object[]{titleValue.serverId,titleValue.title,titleValue.content,titleValue.type,titleValue.operateTime});  
             }  
             db.setTransactionSuccessful();  //设置事务成功完成  
         } finally {  
-            db.endTransaction();    //结束事务  
+            db.endTransaction();//结束事务  
         }  
     }  
     
     public void add(Title titleValue) {  
-		db.execSQL("insert into title(null, ?,?,?,?,?)", 
-				new Object[]{titleValue.serverId,titleValue.title,titleValue.type,titleValue.operateTime});  
+		db.execSQL("insert into title values(null,?,?,?,?,?)", 
+				new Object[]{titleValue.serverId,titleValue.title,titleValue.content,titleValue.type,titleValue.operateTime});  
     }  
       
     public void update(Title titleValue) {  
