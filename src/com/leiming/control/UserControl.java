@@ -25,6 +25,9 @@ public class UserControl {
 		Map<String,String> userParams = new HashMap<String,String>();
 		userParams.put("username", username);
 		userParams.put("user_mac", user_mac);
+		//用于验证的字段
+		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + user_mac.substring(5, 15));
+		userParams.put("proofRule", proofRule.toString());
 		ServerBackInfo sbi = null;
 		try {
 			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/login", ServerBackInfo.TYPE_STRING, userParams, context);

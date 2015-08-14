@@ -92,11 +92,11 @@ public class ListAdapter extends BaseAdapter {
 			}
 			
 			holder.tv_title.setText(msp);
-		} else {
+		}else {
 			holder.tv_title.setText("");
 		}
 		//设置答案的显示样式
-		if (content != null  ) {
+		if (content != null ) {
 			SpannableString msp = new SpannableString(content);
 			if( !TextUtils.isEmpty(sreach) ){
 				//获取所有的条件，对每个条件对应的在content内容首次出现的位置进行设置显示样式

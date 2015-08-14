@@ -192,24 +192,30 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 					finish();
 					break;
 				case 2:
-					Toast.makeText(getApplicationContext(), "用户不存在/没有使用权限",Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "用户不存在/没有使用权限",Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					break;
 				}
 			}else{
 				login.setText("登陆");
+				login.setTextSize(14);
+				register.setText("我要注册");
 				//否则进入注册的处理
 				switch (Integer.parseInt(result)) {
 					
 					case 1:  //注册成功
-						Toast.makeText(getApplicationContext(), "注册成功",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "注册成功",Toast.LENGTH_SHORT).show();
 						break;
 					case 2:
-						Toast.makeText(getApplicationContext(), "您不具备注册的资格，请联系雷鸣",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "您不具备注册的资格，请联系雷鸣",Toast.LENGTH_SHORT).show();
+						break;
+					case 3:
+						Toast.makeText(getApplicationContext(), "您已经注册过了",Toast.LENGTH_SHORT).show();
 						break;
 					default:
 						break;
+					
 				}
 			}
 			super.onPostExecute(result);
