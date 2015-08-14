@@ -202,7 +202,7 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 				login.setTextSize(14);
 				register.setText("我要注册");
 				//否则进入注册的处理
-				switch (Integer.parseInt(result)) {
+				switch (Integer.parseInt(result)){
 					
 					case 1:  //注册成功
 						Toast.makeText(getApplicationContext(), "注册成功",Toast.LENGTH_SHORT).show();
