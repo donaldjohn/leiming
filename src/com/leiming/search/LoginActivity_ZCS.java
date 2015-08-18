@@ -3,6 +3,7 @@ package com.leiming.search;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.leiming.animotion.Transaction;
 import com.leiming.asynctask.BaseAsyncTask;
+import com.leiming.bean.Constants;
 import com.leiming.control.UserControl;
 import com.leiming.utils.AppUtil;
 import com.leiming.widget.CustomProgressDialog;
@@ -37,16 +39,31 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 	//进行登录判断的任务
 	private UserTask userTask = null;
 	
+	//保存当前用户的数据
+	private SharedPreferences preferences; //读取对象
+	private SharedPreferences.Editor editor; //修改对象
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_zcs);
 		init();
 		//对logo以及帐号填写区域进行设置动画
 		Transaction.transfAnimation(logo, login_area);
+		 //判断当前用户是否登录成功过，如果登录成功过则不管联网还是不联网都直接进行登录
+        String everLoginUserName = preferences.getString(Constants.USER_NAME, null);
+        if( !TextUtils.isEmpty(everLoginUserName) ){
+        	//直接进入用户界面
+			Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+	    	startActivity(intent);
+	    	//结束当前activity
+			finish();
+        }
 	}
 	
 	private void init(){
+		preferences = getSharedPreferences("loginUserInfo", MODE_WORLD_READABLE);
+		editor = preferences.edit();
 		initView();
 		initListener();
 	}
@@ -185,6 +202,9 @@ public class LoginActivity_ZCS extends Activity implements OnClickListener{
 				//如果是登录进行登录的处理
 				switch (Integer.parseInt(result)) {
 				case 1:  //登录成功
+					//记录登录过的用户
+					editor.putString(Constants.USER_NAME, username.getText().toString());
+					editor.commit();
 					//启动系统的主界面
 					Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
 			    	startActivity(intent);
