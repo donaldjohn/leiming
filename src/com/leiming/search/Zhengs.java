@@ -7,13 +7,20 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,6 +44,24 @@ public class Zhengs extends ActionBarActivity implements OnItemClickListener{
 	private ActionBar actionbar;
 	ArrayList<View> views;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
+	//显示证书的pop
+	final PopupWindow window =new PopupWindow();
+	private Handler handler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+				case 100:
+					//关闭pop显示
+					window.dismiss();
+					break;
+				default:
+					break;
+			}
+		}
+		
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,32 +101,35 @@ public class Zhengs extends ActionBarActivity implements OnItemClickListener{
 	
 	private void createPopu(int postions){
 		
-		PopupWindow window =new PopupWindow();
 		View pop =LayoutInflater.from(this).inflate(R.layout.pop, null);
 		window.setContentView(pop);
 		views = new ArrayList<View>();
 		// 初始化引导图片列表
 		addView(Container.url, postions);
 		// 初始化引导图片列表
-		ViewPagerAdapter vpAdapter = new ViewPagerAdapter(views,this,postions);
+		ViewPagerAdapter vpAdapter = new ViewPagerAdapter(views,this,postions,handler);
 		
 		ViewPager vp = (ViewPager) pop.findViewById(R.id.viewpager);
 		vp.setAdapter(vpAdapter);
 		//设置当前显示界面
 		vp.setCurrentItem(postions);
 		
-		window.setOutsideTouchable(true);
 		window.setWidth(LayoutParams.MATCH_PARENT);
 		window.setHeight(LayoutParams.MATCH_PARENT);
-		window.setFocusable(true);
 		window.setBackgroundDrawable(new BitmapDrawable());
-		window.update();
 		//设置pop显示的位置，根据坐标进行定位的
 		window.showAtLocation(gridview, Gravity.CENTER, 0, 0);
+		
 	}
 	//初始化viewPaper的adapter的数据
 	public void addView(String[] url,int postions){
-		views.add(getView(url[postions]));
+		/**
+		 * 将所有的证书数据都显示在viewpaper上面
+		 * */
+		for(String urlValue : url){
+			views.add(getView(urlValue));
+		}
+		//views.add(getView(url[postions]));
     }
     //根据url进行获取对应的图片
 	public View getView(String url){
@@ -112,12 +140,27 @@ public class Zhengs extends ActionBarActivity implements OnItemClickListener{
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {  
-	    switch (item.getItemId()) {  
+	    switch (item.getItemId()){  
 		     case android.R.id.home:  
 		         finish();  
 		         return true;  
 	     }
 		return false;  
 	} 
+	
+	//设置返回键的功能
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+		//如果按的是返回键，判断pop是否显示如果是，则将pop关闭就行了， 如果不是则结束当前的activity
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        	if( window.isShowing() ){
+        		window.dismiss();
+        	}else{
+        		finish();
+        	}
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 	
 }
