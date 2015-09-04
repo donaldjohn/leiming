@@ -35,7 +35,7 @@ public class UserControl {
 				try {
 					JSONObject ob = new JSONObject(sbi.outStringContent);
 					//根据返回的state的值进行判断处理操作，1层功能，2没有权限
-					if( "1".equals(ob.get("state")) ){
+					if( "1".equals(ob.get("state").toString()) ){
 						//将用户的权限存储到sharep中
 						String permission = ob.getString("userPermission");
 						if( !TextUtils.isEmpty(permission) ){
