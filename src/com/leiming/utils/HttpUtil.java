@@ -60,7 +60,7 @@ public class HttpUtil {
 	//home的地址
 	//public static final String BASE_URL = "http://10.18.1.103:8080/leimingService";
 	//服务器的地址
-	public static final String BASE_URL = "http://123.57.81.43:8090/leimingService";
+	public static final String BASE_URL = "http://123.57.81.43:8090/lm";
 	//公司的地址
 	//public static final String BASE_URL = "http://192.168.15.117:8090/leimingService";
 	//设置httpClient的参数
@@ -102,7 +102,7 @@ public class HttpUtil {
 								sbt.outIs = httpResponse.getEntity().getContent();
 							}else if( type.endsWith(ServerBackInfo.TYPE_STRING) ){ //要请求的是string
 								String result = EntityUtils.toString(httpResponse.getEntity()); //获取服务器返回的字符串
-								result=new String(result.getBytes("ISO-8859-1"),"GB2312");
+								//result=new String(result.getBytes("ISO-8859-1"),"GB2312");
 								sbt.outStringContent = result;
 							}
 						}
@@ -175,7 +175,7 @@ public class HttpUtil {
 								sbt.outIs = httpResponse.getEntity().getContent();
 							}else if( type.endsWith(ServerBackInfo.TYPE_STRING) ){ //要请求的是string
 								String result = EntityUtils.toString(httpResponse.getEntity()); //获取服务器返回的字符串
-								result=new String(result.getBytes("ISO-8859-1"),"GB2312");
+								//result=new String(result.getBytes("ISO-8859-1"),"GB2312");
 								sbt.outStringContent = result;
 							}
 							return sbt;

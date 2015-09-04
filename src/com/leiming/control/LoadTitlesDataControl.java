@@ -25,7 +25,7 @@ public class LoadTitlesDataControl {
 		userParams.put("type", type);
 		ServerBackInfo sbi = null;
 		try {
-			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/title_getList", ServerBackInfo.TYPE_STRING, userParams, context);
+			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/service/question/list", ServerBackInfo.TYPE_STRING, userParams, context);
 			if(sbi.State.equals("200")){ //如果是服务成功，就解析json将服务器端返回的json中的state返回
 				try {
 					//获取返回的字符串
@@ -44,12 +44,11 @@ public class LoadTitlesDataControl {
 							JSONArray titlesJson = new JSONArray(titles);
 							if(titlesJson.length() > 0){
 								//先将当前数据库中的所有该类型的数据参数
-								//再根据获取的数据，插入到本地的数据库中
+								//再根据获取的数据，插入到本地的数据库中   , titleJson.getString("operateTime")
 								for( int i=0 ;i<titlesJson.length();i++ ){
 									JSONObject titleJson =  titlesJson.getJSONObject(i);
 									title = new Title(titleJson.getInt("id"),titleJson.getString("title"),
-											titleJson.getString("content"),titleJson.getString("type"),
-											titleJson.getString("operateTime")
+											titleJson.getString("content"),titleJson.getString("type")
 											);
 									//添加到本地数据库中
 									tdbm.add(title);
