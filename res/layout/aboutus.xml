@@ -42,7 +42,6 @@
             android:textSize="8pt" />
         
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -58,7 +57,6 @@
             android:text="雷鸣教育校训"
             android:textSize="8pt" />
          <TextView
-            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -67,7 +65,6 @@
             android:textSize="10pt" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -76,11 +73,10 @@
             android:textSize="8pt" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text=" QQ：2535883353"
+            android:text=" QQ：860930312"
             android:textSize="8pt" />
     </LinearLayout>
 

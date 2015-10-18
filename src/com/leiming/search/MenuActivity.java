@@ -89,7 +89,7 @@ public class MenuActivity extends ActionBarActivity {
 				case 4:
 					//教师资格证
 					if (!userPermission.contains(unit.TEACHER.getValue())) {
-						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_SHORT).show();
 					} else {
 						intent.setClass(MenuActivity.this, TitlesActivity.class);
 						//设置intent要获取数据的类型
@@ -101,7 +101,7 @@ public class MenuActivity extends ActionBarActivity {
 				case 1:
 					//计算机二级
 					if (!userPermission.contains(unit.COMPUTER.getValue())) {
-						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_SHORT).show();
 					} else {
 						intent.setClass(MenuActivity.this, TitlesActivity.class);
 						//intent.putExtra("type", "computer");
@@ -112,7 +112,7 @@ public class MenuActivity extends ActionBarActivity {
 				case 2:
 					//会计证
 					if (!userPermission.contains(unit.ACCOUNTING.getValue())) {
-						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_SHORT).show();
 					} else {
 						intent.setClass(MenuActivity.this, TitlesActivity.class);
 						//intent.putExtra("type", "accounting");
@@ -123,7 +123,7 @@ public class MenuActivity extends ActionBarActivity {
 				case 3:
 					//统考类
 					if (!userPermission.contains(unit.EXAM.getValue())) {
-						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "权限不够",Toast.LENGTH_SHORT).show();
 					} else {
 						intent.setClass(MenuActivity.this, MenuActivity.class);
 						//设置一个标示，说明当前要显示的是统考类的功能界面
@@ -144,7 +144,7 @@ public class MenuActivity extends ActionBarActivity {
 					startActivity(intent);
 					break;
 				default:
-					Toast.makeText(getApplicationContext(), "权限不够", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "权限不够", Toast.LENGTH_SHORT).show();
 					break;
 			}
 		}

@@ -12,8 +12,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,7 +33,6 @@ import com.leiming.control.LoadTitlesDataControl;
 import com.leiming.db.TitleDBM;
 import com.leiming.utils.Container;
 import com.leiming.utils.Container.unit;
-
 /**
  * 各选项功能的数据显示界面
  * 显示某一个类别下的所有的试题

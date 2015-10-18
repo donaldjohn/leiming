@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -27,47 +26,53 @@ public class LoadTitlesDataControl {
 		try {
 			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/service/question/list", ServerBackInfo.TYPE_STRING, userParams, context);
 			if(sbi.State.equals("200")){ //如果是服务成功，就解析json将服务器端返回的json中的state返回
-				try {
-					//获取返回的字符串
-					JSONObject ob = new JSONObject(sbi.outStringContent);
-					//将获取对应所有的题目数据
-					String state = ob.getString("state"); //获取服务器返回的状态
-					if(state.equals("1")){ //只有返回数据的时候才会进行存入到本地的数据库中
-						TitleDBM tdbm = new TitleDBM(context);
-						tdbm.delete(type);
-						//获取所有的题目数据
-						String titles = ob.getString("titles");
-						if( !TextUtils.isEmpty(titles) ){
-							
-							Title title;
-							//如果不为空则将获取的所有的题目数据存放到本地数据库中
-							JSONArray titlesJson = new JSONArray(titles);
-							if(titlesJson.length() > 0){
-								//先将当前数据库中的所有该类型的数据参数
-								//再根据获取的数据，插入到本地的数据库中   , titleJson.getString("operateTime")
-								for( int i=0 ;i<titlesJson.length();i++ ){
-									JSONObject titleJson =  titlesJson.getJSONObject(i);
-									title = new Title(titleJson.getInt("id"),titleJson.getString("title"),
-											titleJson.getString("content"),titleJson.getString("type")
-											);
-									//添加到本地数据库中
-									tdbm.add(title);
+				//获取返回的字符串
+				JSONObject ob = new JSONObject(sbi.outStringContent);
+				//将获取对应所有的题目数据
+				String state = ob.getString("state"); //获取服务器返回的状态
+				if(state.equals("1")){ //只有返回数据的时候才会进行存入到本地的数据库中
+					TitleDBM tdbm = new TitleDBM(context);
+					tdbm.delete(type);
+					//获取所有的题目数据
+					String titles = ob.getString("titles");
+					if( !TextUtils.isEmpty(titles) ){
+						
+						Title title = null;
+						//如果不为空则将获取的所有的题目数据存放到本地数据库中
+						JSONArray titlesJson = new JSONArray(titles);
+						if(titlesJson.length() > 0){
+							//先将当前数据库中的所有该类型的数据参数
+							//再根据获取的数据，插入到本地的数据库中   , titleJson.getString("operateTime")
+							for( int i=0 ;i<titlesJson.length();i++ ){
+								JSONObject titleJson =  titlesJson.getJSONObject(i);
+								int id = -1;
+								String titleValue = "";
+								String contentValue = "";
+								String typeValue = "";
+								try {
+									id = titleJson.getInt("id");
+									typeValue = titleJson.getString("type");
+									titleValue = titleJson.getString("title");
+									contentValue = titleJson.getString("content");
+								} catch (Exception e) {
+									
 								}
+								title = new Title(id,titleValue,contentValue,typeValue);
+								//添加到本地数据库中
+								tdbm.add(title);
 							}
 						}
 					}
-					//返回服务器返回的state状态
-					return state;
-				} catch (JSONException e) {
-					e.printStackTrace();
 				}
+				//返回服务器返回的state状态
+				return state;
 			}else{
 				return sbi.State; //直接返回服务器相应的状态值
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		return null;
+		return "4";
 	}
 	
 	//根据对应的条件在data_temp中查找符合要求的数据
