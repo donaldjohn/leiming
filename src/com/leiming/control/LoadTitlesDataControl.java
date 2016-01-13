@@ -21,7 +21,7 @@ public class LoadTitlesDataControl {
 	//根据类型去服务器进行加载对应类型的题目的数据，将这些数据写入到sqllite数据库中
 	public static String loadDataForType(String type,Context context) {
 		Map<String,String> userParams = new HashMap<String,String>();
-		userParams.put("type", type);
+		userParams.put("type", type); 
 		ServerBackInfo sbi = null;
 		try {
 			sbi = HttpUtil.postRequst(HttpUtil.BASE_URL+"/service/question/list", ServerBackInfo.TYPE_STRING, userParams, context);
